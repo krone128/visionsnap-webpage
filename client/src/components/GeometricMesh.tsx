@@ -6,7 +6,7 @@ const GeometricMesh: React.FC = () => {
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const meshRef = useRef<THREE.Mesh | null>(null);
+  const deerRef = useRef<THREE.Group | null>(null);
   const scrollRef = useRef(0);
 
   // Custom shader material
@@ -14,11 +14,36 @@ const GeometricMesh: React.FC = () => {
     varying vec2 vUv;
     varying vec3 vPosition;
     varying vec3 vNormal;
+    varying float vRandom;
+    
+    uniform float time;
+    
+    // Random function for vertex movement
+    float random(vec2 co) {
+      return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+    }
+    
     void main() {
       vUv = uv;
       vPosition = position;
       vNormal = normal;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      
+      // Create random value for each vertex
+      vRandom = random(position.xy);
+      
+      // Add randomized vertex movement for breathing effect
+      vec3 pos = position;
+      float breathing = sin(time * 0.5 + vRandom * 6.28) * 0.2;
+      pos *= (1.0 + breathing);
+      
+      // Add larger random offset to each vertex
+      pos += vec3(
+        sin(time * 0.3 + vRandom * 6.28) * 0.2,
+        cos(time * 0.4 + vRandom * 6.28) * 0.2,
+        sin(time * 0.2 + vRandom * 6.28) * 0.2
+      );
+      
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
     }
   `;
 
@@ -28,12 +53,50 @@ const GeometricMesh: React.FC = () => {
     varying vec2 vUv;
     varying vec3 vPosition;
     varying vec3 vNormal;
+    varying float vRandom;
+
+    vec3 warmColor(float t) {
+      // Create warm color palette (orange, yellow, gold)
+      vec3 orange = vec3(1.0, 0.5, 0.0);  // Orange
+      vec3 yellow = vec3(1.0, 0.8, 0.2);  // Yellow
+      vec3 gold = vec3(1.0, 0.843, 0.0);  // Gold
+      
+      // Smoothly interpolate between colors
+      if (t < 0.5) {
+        return mix(orange, yellow, t * 2.0);
+      } else {
+        return mix(yellow, gold, (t - 0.5) * 2.0);
+      }
+    }
 
     void main() {
-      vec3 color = vec3(0.0, 0.953, 1.0); // Neon blue
-      float glow = sin(vPosition.y * 10.0 + time + scroll) * 0.5 + 0.5;
-      float opacity = glow * 0.3;
-      gl_FragColor = vec4(color, opacity);
+      // Create breathing effect with random variation
+      float breathing = sin(time * 0.5 + vRandom * 6.28) * 0.5 + 0.5;
+      
+      // Create UV-based color shift with random variation (restricted to warm colors)
+      float hue = fract(vUv.x + time * 0.05 + vRandom * 0.2);
+      vec3 color = warmColor(hue);
+      
+      // Create circular fade from center with random variation
+      vec2 center = vec2(0.5, 0.5);
+      float dist = length(vUv - center);
+      float fade = 1.0 - smoothstep(0.0, 0.5, dist);
+      
+      // Combine effects with random variation
+      float intensity = mix(breathing, fade, 0.5);
+      
+      // Add randomized pulsing
+      float pulse = sin(time * 0.3 + vRandom * 6.28) * 0.5 + 0.5;
+      intensity *= pulse;
+      
+      // Create smooth alpha transition
+      float alpha = intensity * 0.8;
+      alpha = smoothstep(0.0, 1.0, alpha);
+      
+      // Ensure minimum visibility
+      alpha = max(alpha, 0.1);
+      
+      gl_FragColor = vec4(color, alpha);
     }
   `;
 
@@ -51,7 +114,7 @@ const GeometricMesh: React.FC = () => {
       0.1,
       1000
     );
-    camera.position.z = 5;
+    camera.position.z = 8; // Moved camera back to see larger plane
     cameraRef.current = camera;
 
     // Renderer setup
@@ -64,8 +127,7 @@ const GeometricMesh: React.FC = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Create geometric mesh
-    const geometry = new THREE.TorusKnotGeometry(2, 0.5, 100, 16);
+    // Create material
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
@@ -78,10 +140,26 @@ const GeometricMesh: React.FC = () => {
       wireframe: true,
       wireframeLinewidth: 1
     });
+
+    // Create complex plane with more triangles and random vertex positions
+    const geometry = new THREE.PlaneGeometry(8, 8, 20, 20);
+    
+    // Add random positions to vertices
+    const positions = geometry.attributes.position.array;
+    for (let i = 0; i < positions.length; i += 3) {
+      positions[i] += (Math.random() - 0.5) * 0.5;     // X
+      positions[i + 1] += (Math.random() - 0.5) * 0.5; // Y
+      positions[i + 2] += (Math.random() - 0.5) * 0.5; // Z
+    }
+    geometry.attributes.position.needsUpdate = true;
+    
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = -5; // Position on the left side
+    
+    // Rotate to face camera
+    mesh.rotation.x = 0;
+    mesh.rotation.y = 0;
+    mesh.rotation.z = 0;
     scene.add(mesh);
-    meshRef.current = mesh;
 
     // Handle scroll
     const handleScroll = () => {
@@ -92,11 +170,13 @@ const GeometricMesh: React.FC = () => {
     // Animation
     const animate = () => {
       requestAnimationFrame(animate);
-      if (meshRef.current) {
-        const material = meshRef.current.material as THREE.ShaderMaterial;
+      if (mesh) {
+        const material = mesh.material as THREE.ShaderMaterial;
         material.uniforms.time.value += 0.01;
         material.uniforms.scroll.value = scrollRef.current;
-        meshRef.current.rotation.y += 0.002;
+        
+        // Gentle floating motion
+        mesh.position.y = Math.sin(material.uniforms.time.value * 0.5) * 0.2;
       }
       renderer.render(scene, camera);
     };

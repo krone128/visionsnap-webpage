@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { 
+  pageTransitionVariant, 
+  headerTransitionVariant, 
+  descriptionTransitionVariant, 
+  cardTransitionVariant, 
+  staggerContainerVariant 
+} from '../styles/animations';
+import '../styles/animations.css';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -31,14 +39,39 @@ const Contact: React.FC = () => {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      variants={pageTransitionVariant}
+      initial="initial"
+      animate="animate"
+      exit="exit"
       className="container mx-auto px-4 py-8"
     >
-      <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="glass p-6">
+      <div className="text-center mb-12">
+        <motion.h1 
+          variants={headerTransitionVariant}
+          className="text-4xl font-bold text-yellow-400 mb-4"
+        >
+          Contact Us
+        </motion.h1>
+        <motion.p 
+          variants={descriptionTransitionVariant}
+          className="text-xl text-gray-300 max-w-2xl mx-auto"
+        >
+          Get in touch with our team to discuss your project
+        </motion.p>
+      </div>
+      <motion.div 
+        variants={staggerContainerVariant}
+        initial="initial"
+        animate="animate"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8"
+      >
+        <motion.div 
+          ref={infoRef}
+          variants={cardTransitionVariant}
+          initial="initial"
+          animate={infoInView ? "animate" : "initial"}
+          className="glass p-6"
+        >
           <h2 className="text-2xl font-bold mb-4 text-yellow-400">Get in Touch</h2>
           <p className="text-gray-300 mb-6">
             Have questions about our AR and computer vision solutions? We're here to help.
@@ -61,8 +94,14 @@ const Contact: React.FC = () => {
               <p className="text-gray-300">Saturday - Sunday: Closed</p>
             </div>
           </div>
-        </div>
-        <div className="glass p-6">
+        </motion.div>
+        <motion.div 
+          ref={formRef}
+          variants={cardTransitionVariant}
+          initial="initial"
+          animate={formInView ? "animate" : "initial"}
+          className="glass p-6"
+        >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="form-label">Name</label>
@@ -104,8 +143,8 @@ const Contact: React.FC = () => {
               Send Message
             </button>
           </form>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 };

@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { motion } from 'framer-motion';
+import { 
+  pageTransitionVariant, 
+  headerTransitionVariant, 
+  descriptionTransitionVariant, 
+  cardTransitionVariant
+} from '../styles/animations';
+import '../styles/animations.css';
 
 interface BlogPost {
   id: string;
@@ -18,26 +25,33 @@ const EditBlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [post, setPost] = useState<BlogPost | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     content: '',
     imageUrl: '',
-    videoUrl: '',
+    videoUrl: ''
   });
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    content: '',
+    imageUrl: '',
+    videoUrl: ''
+  });
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/blog/${id}`);
-        const post = response.data;
+        setPost(response.data);
         setFormData({
-          title: post.title,
-          content: post.content,
-          imageUrl: post.imageUrl || '',
-          videoUrl: post.videoUrl || '',
+          title: response.data.title,
+          content: response.data.content,
+          imageUrl: response.data.imageUrl || '',
+          videoUrl: response.data.videoUrl || ''
         });
       } catch (err) {
         setError('Failed to fetch blog post');
@@ -50,18 +64,15 @@ const EditBlogPost: React.FC = () => {
     fetchPost();
   }, [id]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    setError(null);
+    setValidationErrors({
+      title: '',
+      content: '',
+      imageUrl: '',
+      videoUrl: ''
+    });
 
     try {
       const token = localStorage.getItem('token');
@@ -73,47 +84,76 @@ const EditBlogPost: React.FC = () => {
         }
       });
 
-      navigate('/blog');
+      navigate(`/blog/${id}`);
     } catch (err) {
-      setError('Failed to update blog post');
       console.error('Error updating blog post:', err);
+      setValidationErrors({
+        title: 'Failed to update blog post',
+        content: '',
+        imageUrl: '',
+        videoUrl: ''
+      });
     } finally {
       setSaving(false);
     }
   };
 
-  if (!user || (user.role !== 'admin' && user.role !== 'editor')) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-          You don't have permission to edit blog posts.
-        </div>
+      <div className="flex-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
 
-  if (loading) {
+  if (error || !post) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <LoadingSpinner size="lg" />
+      <div className="container py-12">
+        <div className="bg-red-50 border border-red-200 rounded-md p-4">
+          <p className="text-red-700">{error || 'Post not found'}</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container py-12">
-      <h1 className="section-title">Edit Blog Post</h1>
-      
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-8">
-          <p className="text-red-700">{error}</p>
-        </div>
-      )}
+    <motion.div 
+      variants={pageTransitionVariant}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="container mx-auto px-4 py-8"
+    >
+      <motion.div 
+        variants={headerTransitionVariant}
+        initial="initial"
+        animate="animate"
+        className="max-w-4xl mx-auto"
+      >
+        <motion.h1 
+          variants={headerTransitionVariant}
+          className="text-4xl font-bold text-yellow-400 mb-8"
+        >
+          Edit Blog Post
+        </motion.h1>
 
-      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-        <div className="space-y-6">
+        <motion.form 
+          variants={cardTransitionVariant}
+          initial="initial"
+          animate="animate"
+          onSubmit={handleSubmit}
+          className="space-y-6"
+        >
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="title" className="block text-sm font-medium text-gray-300">
               Title
             </label>
             <input
@@ -122,13 +162,16 @@ const EditBlogPost: React.FC = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
+              className={`form-input mt-1 ${validationErrors.title ? 'border-red-500' : ''}`}
               required
-              className="input mt-1"
             />
+            {validationErrors.title && (
+              <p className="mt-1 text-sm text-red-600">{validationErrors.title}</p>
+            )}
           </div>
 
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="content" className="block text-sm font-medium text-gray-300">
               Content
             </label>
             <textarea
@@ -136,14 +179,17 @@ const EditBlogPost: React.FC = () => {
               name="content"
               value={formData.content}
               onChange={handleChange}
-              required
               rows={10}
-              className="input mt-1"
+              className={`form-input mt-1 ${validationErrors.content ? 'border-red-500' : ''}`}
+              required
             />
+            {validationErrors.content && (
+              <p className="mt-1 text-sm text-red-600">{validationErrors.content}</p>
+            )}
           </div>
 
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-300">
               Image URL (optional)
             </label>
             <input
@@ -152,12 +198,15 @@ const EditBlogPost: React.FC = () => {
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              className="input mt-1"
+              className={`form-input mt-1 ${validationErrors.imageUrl ? 'border-red-500' : ''}`}
             />
+            {validationErrors.imageUrl && (
+              <p className="mt-1 text-sm text-red-600">{validationErrors.imageUrl}</p>
+            )}
           </div>
 
           <div>
-            <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-300">
               Video URL (optional)
             </label>
             <input
@@ -166,14 +215,20 @@ const EditBlogPost: React.FC = () => {
               name="videoUrl"
               value={formData.videoUrl}
               onChange={handleChange}
-              className="input mt-1"
+              className={`form-input mt-1 ${validationErrors.videoUrl ? 'border-red-500' : ''}`}
             />
+            {validationErrors.videoUrl && (
+              <p className="mt-1 text-sm text-red-600">{validationErrors.videoUrl}</p>
+            )}
           </div>
 
-          <div className="flex justify-end space-x-4">
+          <motion.div 
+            variants={descriptionTransitionVariant}
+            className="flex justify-end space-x-4"
+          >
             <button
               type="button"
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate(`/blog/${id}`)}
               className="btn btn-secondary"
             >
               Cancel
@@ -181,14 +236,14 @@ const EditBlogPost: React.FC = () => {
             <button
               type="submit"
               disabled={saving}
-              className="btn btn-primary"
+              className="btn"
             >
               {saving ? 'Saving...' : 'Save Changes'}
             </button>
-          </div>
-        </div>
-      </form>
-    </div>
+          </motion.div>
+        </motion.form>
+      </motion.div>
+    </motion.div>
   );
 };
 

@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
+import { motion } from 'framer-motion';
+import { 
+  pageTransitionVariant, 
+  headerTransitionVariant, 
+  descriptionTransitionVariant, 
+  cardTransitionVariant
+} from '../styles/animations';
+import '../styles/animations.css';
 
 interface BlogPost {
   id: string;
@@ -76,9 +84,20 @@ const BlogPostDetail: React.FC = () => {
   }
 
   return (
-    <div className="container py-12">
-      <div className="flex justify-between items-center mb-8">
-        <Link to="/blog" className="text-primary-600 hover:text-primary-700">
+    <motion.div 
+      variants={pageTransitionVariant}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="container py-12"
+    >
+      <motion.div 
+        variants={headerTransitionVariant}
+        initial="initial"
+        animate="animate"
+        className="flex justify-between items-center mb-8"
+      >
+        <Link to="/blog" className="text-yellow-400 hover:text-yellow-300">
           ← Back to Blog
         </Link>
         {user && (user.role === 'admin' || user.role === 'editor') && (
@@ -97,9 +116,14 @@ const BlogPostDetail: React.FC = () => {
             </button>
           </div>
         )}
-      </div>
+      </motion.div>
       
-      <article className="card">
+      <motion.article 
+        variants={cardTransitionVariant}
+        initial="initial"
+        animate="animate"
+        className="card"
+      >
         {post.imageUrl && (
           <img
             src={post.imageUrl}
@@ -108,24 +132,38 @@ const BlogPostDetail: React.FC = () => {
           />
         )}
         <div className="p-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
-          <div className="flex items-center text-gray-500 mb-8">
+          <motion.h1 
+            variants={headerTransitionVariant}
+            className="text-4xl font-bold text-yellow-400 mb-4"
+          >
+            {post.title}
+          </motion.h1>
+          <motion.div 
+            variants={descriptionTransitionVariant}
+            className="flex items-center text-gray-300 mb-8"
+          >
             <span>{post.author}</span>
             <span className="mx-2">•</span>
             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-          </div>
+          </motion.div>
           
-          <div className="prose prose-lg max-w-none">
+          <motion.div 
+            variants={descriptionTransitionVariant}
+            className="prose prose-lg max-w-none"
+          >
             {post.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4">
+              <p key={index} className="mb-4 text-gray-300">
                 {paragraph}
               </p>
             ))}
-          </div>
+          </motion.div>
 
           {post.videoUrl && (
-            <div className="mt-8">
-              <h2 className="text-2xl font-semibold mb-4">Video</h2>
+            <motion.div 
+              variants={descriptionTransitionVariant}
+              className="mt-8"
+            >
+              <h2 className="text-2xl font-semibold mb-4 text-yellow-400">Video</h2>
               <div className="aspect-w-16 aspect-h-9">
                 <iframe
                   src={post.videoUrl}
@@ -134,11 +172,11 @@ const BlogPostDetail: React.FC = () => {
                   allowFullScreen
                 />
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
-      </article>
-    </div>
+      </motion.article>
+    </motion.div>
   );
 };
 

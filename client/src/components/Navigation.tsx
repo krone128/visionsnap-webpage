@@ -13,15 +13,10 @@ const Navigation: React.FC = () => {
   return (
     <nav className="bg-black/80 border-b border-yellow-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-32">
           <div className="flex">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img
-                className="h-8 w-auto"
-                src="/logo.svg"
-                alt="VisionSnap"
-              />
-              <span className="ml-2 text-xl font-bold text-yellow-500">VisionSnap</span>
+              <span className="text-4xl font-bold text-yellow-500">VisionSnap</span>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link

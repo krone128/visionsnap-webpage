@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { motion } from 'framer-motion';
+import { 
+  pageTransitionVariant, 
+  headerTransitionVariant, 
+  descriptionTransitionVariant, 
+  cardTransitionVariant
+} from '../styles/animations';
+import '../styles/animations.css';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -30,21 +38,42 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
+    console.log('Login attempt:', formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="glass p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-8 text-center text-yellow-400">Login</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+    <motion.div 
+      variants={pageTransitionVariant}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="min-h-screen flex items-center justify-center"
+    >
+      <motion.div 
+        variants={cardTransitionVariant}
+        initial="initial"
+        animate="animate"
+        className="glass p-8 w-full max-w-md"
+      >
+        <motion.h1 
+          variants={headerTransitionVariant}
+          className="text-3xl font-bold mb-8 text-center text-yellow-400"
+        >
+          Login
+        </motion.h1>
+        <motion.form 
+          variants={descriptionTransitionVariant}
+          onSubmit={handleSubmit} 
+          className="space-y-6"
+        >
           <div>
             <label htmlFor="email" className="form-label">Email</label>
             <input
@@ -72,8 +101,11 @@ const Login: React.FC = () => {
           <button type="submit" className="btn w-full">
             Login
           </button>
-        </form>
-        <div className="mt-6 text-center">
+        </motion.form>
+        <motion.div 
+          variants={descriptionTransitionVariant}
+          className="mt-6 text-center"
+        >
           <p className="text-gray-300">
             Don't have an account?{' '}
             <button
@@ -83,9 +115,9 @@ const Login: React.FC = () => {
               Register
             </button>
           </p>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

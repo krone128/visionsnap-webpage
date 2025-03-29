@@ -5,6 +5,14 @@ import { Container, Typography, Box, CircularProgress, Alert } from '@mui/materi
 import BlogPostCard from '../components/BlogPostCard';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { 
+  pageTransitionVariant, 
+  headerTransitionVariant, 
+  descriptionTransitionVariant, 
+  cardTransitionVariant, 
+  staggerContainerVariant 
+} from '../styles/animations';
+import '../styles/animations.css';
 
 const Blog: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -56,40 +64,49 @@ const Blog: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="lg">
-      <Box py={8}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+    <motion.div 
+      variants={pageTransitionVariant}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="container mx-auto px-4 py-8"
+    >
+      <div className="text-center mb-12">
+        <motion.h1 
+          variants={headerTransitionVariant}
+          className="text-4xl font-bold text-yellow-400 mb-4"
         >
-          <Typography variant="h2" component="h1" gutterBottom>
-            Blog
+          Blog
+        </motion.h1>
+        <motion.p 
+          variants={descriptionTransitionVariant}
+          className="text-xl text-gray-300 max-w-2xl mx-auto"
+        >
+          Insights and updates from our team
+        </motion.p>
+      </div>
+      <motion.div 
+        variants={staggerContainerVariant}
+        initial="initial"
+        animate="animate"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {posts && posts.length > 0 ? (
+          posts.map((post, index) => (
+            <motion.div
+              key={post.id}
+              variants={cardTransitionVariant}
+            >
+              <BlogPostCard post={post} />
+            </motion.div>
+          ))
+        ) : (
+          <Typography variant="body1" color="textSecondary">
+            No blog posts available.
           </Typography>
-        </motion.div>
-        <Box sx={{ mt: 4 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
-            {posts && posts.length > 0 ? (
-              posts.map((post, index) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: 0.2 * (index + 1) }}
-                >
-                  <BlogPostCard post={post} />
-                </motion.div>
-              ))
-            ) : (
-              <Typography variant="body1" color="textSecondary">
-                No blog posts available.
-              </Typography>
-            )}
-          </div>
-        </Box>
-      </Box>
-    </Container>
+        )}
+      </motion.div>
+    </motion.div>
   );
 };
 

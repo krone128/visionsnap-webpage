@@ -1,0 +1,118 @@
+/* Animation base styles */
+.animate-container {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Fade in and slide up animations */
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+  transform: translateZ(0);
+}
+
+.fade-in-up-delayed {
+  animation: fadeInUp 0.5s ease-out forwards;
+  animation-delay: 0.1s;
+  transform: translateZ(0);
+}
+
+.fade-in-up-more-delayed {
+  animation: fadeInUp 0.5s ease-out forwards;
+  animation-delay: 0.2s;
+  transform: translateZ(0);
+}
+
+.fade-in-up-even-more-delayed {
+  animation: fadeInUp 0.5s ease-out forwards;
+  animation-delay: 0.3s;
+  transform: translateZ(0);
+}
+
+.fade-in-up-most-delayed {
+  animation: fadeInUp 0.5s ease-out forwards;
+  animation-delay: 0.4s;
+  transform: translateZ(0);
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Fade in and slide up more */
+.fade-in-up-more {
+  animation: fadeInUpMore 0.5s ease-out forwards;
+  transform: translateZ(0);
+}
+
+@keyframes fadeInUpMore {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Fade in and slide up medium */
+.fade-in-up-medium {
+  animation: fadeInUpMedium 0.5s ease-out forwards;
+  transform: translateZ(0);
+}
+
+@keyframes fadeInUpMedium {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Staggered animations */
+.stagger-animation {
+  animation: staggerFadeIn 0.5s ease-out forwards;
+  transform: translateZ(0);
+}
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Animation delays for staggered items */
+.stagger-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-delay-4 {
+  animation-delay: 0.4s;
+} 

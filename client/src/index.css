@@ -23,29 +23,27 @@
     letter-spacing: 0.02em;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Rajdhani', sans-serif;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
   h1 {
-    @apply text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600;
+    @apply text-4xl font-bold text-yellow-400 mb-6;
+    font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.1em;
   }
 
   h2 {
-    @apply text-3xl font-bold text-yellow-500;
+    @apply text-3xl font-bold text-yellow-400 mb-4;
+    font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.08em;
   }
 
   h3 {
-    @apply text-2xl font-bold text-yellow-400;
+    @apply text-2xl font-bold text-yellow-400 mb-3;
+    font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.06em;
   }
 
   h4 {
-    @apply text-xl font-bold text-gray-200;
+    @apply text-xl font-bold text-gray-200 mb-2;
+    font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.04em;
   }
 
@@ -60,7 +58,7 @@
   }
 
   p {
-    @apply text-gray-300;
+    @apply text-gray-300 mb-4;
     line-height: 1.7;
   }
 
@@ -117,12 +115,12 @@
   }
 
   .prose h1 {
-    @apply text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600;
+    @apply text-4xl font-bold mb-4 text-yellow-400;
     letter-spacing: 0.1em;
   }
 
   .prose h2 {
-    @apply text-3xl font-bold mb-4 text-yellow-500;
+    @apply text-3xl font-bold mb-4 text-yellow-400;
     letter-spacing: 0.08em;
   }
 
