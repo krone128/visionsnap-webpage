@@ -1,77 +1,224 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const Navigation: React.FC = () => {
   const location = useLocation();
   const { user, login, logout } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const DesktopNavLinks = () => (
+    <>
+      <Link
+        to="/"
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 ${
+          isActive('/') 
+            ? 'border-yellow-500 text-yellow-400' 
+            : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
+        }`}
+      >
+        Home
+      </Link>
+      <Link
+        to="/portfolio"
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 ${
+          isActive('/portfolio') 
+            ? 'border-yellow-500 text-yellow-400' 
+            : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
+        }`}
+      >
+        Portfolio
+      </Link>
+      <Link
+        to="/solutions"
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 ${
+          isActive('/solutions') 
+            ? 'border-yellow-500 text-yellow-400' 
+            : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
+        }`}
+      >
+        Solutions
+      </Link>
+      <Link
+        to="/about"
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 ${
+          isActive('/about') 
+            ? 'border-yellow-500 text-yellow-400' 
+            : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
+        }`}
+      >
+        About
+      </Link>
+      <Link
+        to="/blog"
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 ${
+          isActive('/blog') 
+            ? 'border-yellow-500 text-yellow-400' 
+            : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
+        }`}
+      >
+        Blog
+      </Link>
+      <Link
+        to="/contact"
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 ${
+          isActive('/contact') 
+            ? 'border-yellow-500 text-yellow-400' 
+            : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
+        }`}
+      >
+        Contact
+      </Link>
+    </>
+  );
+
+  const MobileNavLinks = () => (
+    <>
+      <Link
+        to="/"
+        className={`block px-3 py-2 rounded-md text-base font-medium ${
+          isActive('/') ? 'text-yellow-400 bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Home
+      </Link>
+      <Link
+        to="/portfolio"
+        className={`block px-3 py-2 rounded-md text-base font-medium ${
+          isActive('/portfolio') ? 'text-yellow-400 bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Portfolio
+      </Link>
+      <Link
+        to="/solutions"
+        className={`block px-3 py-2 rounded-md text-base font-medium ${
+          isActive('/solutions') ? 'text-yellow-400 bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Solutions
+      </Link>
+      <Link
+        to="/about"
+        className={`block px-3 py-2 rounded-md text-base font-medium ${
+          isActive('/about') ? 'text-yellow-400 bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        About
+      </Link>
+      <Link
+        to="/blog"
+        className={`block px-3 py-2 rounded-md text-base font-medium ${
+          isActive('/blog') ? 'text-yellow-400 bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Blog
+      </Link>
+      <Link
+        to="/contact"
+        className={`block px-3 py-2 rounded-md text-base font-medium ${
+          isActive('/contact') ? 'text-yellow-400 bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Contact
+      </Link>
+    </>
+  );
+
   return (
     <nav className="bg-black/80 border-b border-yellow-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-32">
-          <div className="flex">
-            <Link to="/" className="flex-shrink-0 flex items-center">
-              <span className="text-4xl font-bold text-yellow-500">VisionSnap</span>
+        <div className="flex justify-between h-16 sm:h-20">
+          <div className="flex items-center">
+            <Link to="/" className="flex-shrink-0">
+              <span className="text-3xl sm:text-4xl font-bold text-yellow-500">VisionSnap</span>
             </Link>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link
-                to="/"
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
-                }`}
-              >
-                Home
-              </Link>
-              <Link
-                to="/portfolio"
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/portfolio') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
-                }`}
-              >
-                Portfolio
-              </Link>
-              <Link
-                to="/solutions"
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/solutions') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
-                }`}
-              >
-                Solutions
-              </Link>
-              <Link
-                to="/about"
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/about') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
-                }`}
-              >
-                About
-              </Link>
-              <Link
-                to="/blog"
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/blog') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
-                }`}
-              >
-                Blog
-              </Link>
-              <Link
-                to="/contact"
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/contact') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
-                }`}
-              >
-                Contact
-              </Link>
+            <div className="hidden sm:ml-8 sm:flex sm:space-x-4">
+              <DesktopNavLinks />
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          
+          {/* Desktop auth buttons */}
+          <div className="hidden sm:flex sm:items-center sm:space-x-6">
             {user ? (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-6">
+                {(user.role === 'admin' || user.role === 'editor') && (
+                  <Link 
+                    to="/admin" 
+                    className="text-sm font-medium text-gray-400 hover:text-yellow-400 transition-colors duration-200"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <div className="flex items-center space-x-3">
+                  {user.picture && (
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      className="h-8 w-8 rounded-full border border-yellow-500/30"
+                    />
+                  )}
+                  <span className="text-sm font-medium text-gray-300">{user.name}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  className="btn text-sm"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={login}
+                className="btn text-sm"
+              >
+                Sign In
+              </button>
+            )}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="flex items-center sm:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-yellow-400 hover:bg-yellow-500/10 focus:outline-none"
+            >
+              <span className="sr-only">Open main menu</span>
+              {!isMobileMenuOpen ? (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              ) : (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div className={`sm:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+        <div className="pt-2 pb-3 space-y-1 bg-black/90">
+          <MobileNavLinks />
+          <div className="px-3 py-2">
+            {user ? (
+              <div className="flex flex-col space-y-2">
                 {(user.role === 'admin' || user.role === 'editor') && (
                   <Link to="/admin" className="text-gray-400 hover:text-yellow-400">
                     Admin
@@ -89,7 +236,7 @@ const Navigation: React.FC = () => {
                 </div>
                 <button
                   onClick={logout}
-                  className="btn"
+                  className="btn w-full"
                 >
                   Sign Out
                 </button>
@@ -97,7 +244,7 @@ const Navigation: React.FC = () => {
             ) : (
               <button
                 onClick={login}
-                className="btn"
+                className="btn w-full"
               >
                 Sign In
               </button>

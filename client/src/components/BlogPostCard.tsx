@@ -77,13 +77,20 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           }}
         />
       )}
-      <CardContent className="flex-grow" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
+      <CardContent className="flex-grow" sx={{ 
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        padding: '1.5rem',
+        '&:last-child': {
+          paddingBottom: '1.5rem'
+        }
+      }}>
         <motion.div 
           variants={blogPostContentVariant}
           initial="initial"
           animate="animate"
+          className="flex flex-col h-full"
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
             <Avatar 
               sx={{ 
                 width: 40, 
@@ -97,7 +104,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
               {post.author.name.charAt(0)}
             </Avatar>
             <Box>
-              <Typography variant="subtitle2" className="text-yellow-400">
+              <Typography variant="subtitle2" className="text-yellow-400 mb-1">
                 {post.author.name}
               </Typography>
               <Typography variant="caption" className="text-gray-400">
@@ -106,15 +113,15 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
             </Box>
           </Box>
 
-          <Typography variant="h6" component="h2" className="text-yellow-400 mb-2">
+          <Typography variant="h6" component="h2" className="text-yellow-400 mb-3">
             {post.title}
           </Typography>
           
-          <Typography variant="body2" className="text-gray-300 mb-4">
+          <Typography variant="body2" className="text-gray-300 mb-4 flex-grow">
             {excerpt}
           </Typography>
 
-          <Box className="flex flex-wrap gap-2 mb-3">
+          <Box className="flex flex-wrap gap-2 mb-4">
             {randomTags.map((tag, index) => {
               const tagStyle = tagCategories[tag as keyof typeof tagCategories] || {
                 bg: 'rgba(234, 179, 8, 0.2)',
@@ -142,7 +149,12 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
             })}
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            mt: 'auto'
+          }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <IconButton 
                 onClick={handleLike}
@@ -162,7 +174,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
             </Box>
             <Link 
               to={`/blog/${post.id}`}
-              className="text-yellow-400 hover:text-yellow-300 text-sm"
+              className="text-yellow-400 hover:text-yellow-300 text-sm font-medium"
             >
               Read more →
             </Link>

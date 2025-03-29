@@ -24,41 +24,41 @@
   }
 
   h1 {
-    @apply text-4xl font-bold text-yellow-400 mb-6;
+    @apply text-3xl sm:text-4xl font-bold text-yellow-400 mb-4 sm:mb-6;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.1em;
   }
 
   h2 {
-    @apply text-3xl font-bold text-yellow-400 mb-4;
+    @apply text-2xl sm:text-3xl font-bold text-yellow-400 mb-3 sm:mb-4;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.08em;
   }
 
   h3 {
-    @apply text-2xl font-bold text-yellow-400 mb-3;
+    @apply text-xl sm:text-2xl font-bold text-yellow-400 mb-2 sm:mb-3;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.06em;
   }
 
   h4 {
-    @apply text-xl font-bold text-gray-200 mb-2;
+    @apply text-lg sm:text-xl font-bold text-gray-200 mb-2;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.04em;
   }
 
   h5 {
-    @apply text-lg font-bold text-gray-300;
+    @apply text-base sm:text-lg font-bold text-gray-300;
     letter-spacing: 0.03em;
   }
 
   h6 {
-    @apply text-base font-bold text-gray-400;
+    @apply text-sm sm:text-base font-bold text-gray-400;
     letter-spacing: 0.02em;
   }
 
   p {
-    @apply text-gray-300 mb-4;
+    @apply text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base;
     line-height: 1.7;
   }
 
@@ -70,7 +70,7 @@
 
 @layer components {
   .btn {
-    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105;
+    @apply px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 text-sm sm:text-base;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -86,12 +86,12 @@
   }
 
   .input {
-    @apply w-full px-4 py-2 bg-black border border-yellow-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-gray-100;
+    @apply w-full px-3 sm:px-4 py-2 bg-black border border-yellow-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-gray-100 text-sm sm:text-base;
     font-family: 'Space Grotesk', sans-serif;
   }
 
   .card {
-    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg hover:shadow-yellow-500/20 transition-all duration-300;
+    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 p-4 sm:p-6;
   }
 
   .metallic-border {
@@ -107,7 +107,7 @@
   }
 
   .glass-panel {
-    @apply bg-black/80 border border-yellow-500/20 rounded-lg;
+    @apply bg-black/80 border border-yellow-500/20 rounded-lg p-4 sm:p-6;
   }
 
   .prose {
@@ -115,52 +115,52 @@
   }
 
   .prose h1 {
-    @apply text-4xl font-bold mb-4 text-yellow-400;
+    @apply text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-yellow-400;
     letter-spacing: 0.1em;
   }
 
   .prose h2 {
-    @apply text-3xl font-bold mb-4 text-yellow-400;
+    @apply text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-yellow-400;
     letter-spacing: 0.08em;
   }
 
   .prose h3 {
-    @apply text-2xl font-bold mb-4 text-yellow-400;
+    @apply text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-yellow-400;
     letter-spacing: 0.06em;
   }
 
   .prose p {
-    @apply mb-4 text-gray-300;
+    @apply mb-3 sm:mb-4 text-gray-300 text-sm sm:text-base;
     line-height: 1.7;
   }
 
   .prose ul {
-    @apply list-disc list-inside mb-4 text-gray-300;
+    @apply list-disc list-inside mb-3 sm:mb-4 text-gray-300 text-sm sm:text-base;
   }
 
   .prose ol {
-    @apply list-decimal list-inside mb-4 text-gray-300;
+    @apply list-decimal list-inside mb-3 sm:mb-4 text-gray-300 text-sm sm:text-base;
   }
 
   .prose li {
-    @apply mb-2;
+    @apply mb-1 sm:mb-2;
   }
 
   .prose blockquote {
-    @apply border-l-4 border-yellow-500 pl-4 italic my-4 text-gray-300;
+    @apply border-l-4 border-yellow-500 pl-4 italic my-3 sm:my-4 text-gray-300 text-sm sm:text-base;
   }
 
   .prose code {
-    @apply bg-black rounded px-1 py-0.5 text-yellow-400;
+    @apply bg-black rounded px-1 py-0.5 text-yellow-400 text-sm sm:text-base;
     font-family: 'Fira Code', monospace;
   }
 
   .prose pre {
-    @apply bg-black rounded p-4 overflow-x-auto my-4 border border-yellow-500/20;
+    @apply bg-black rounded p-3 sm:p-4 overflow-x-auto my-3 sm:my-4 border border-yellow-500/20;
   }
 
   .prose img {
-    @apply rounded-lg my-4 border border-yellow-500/20;
+    @apply rounded-lg my-3 sm:my-4 border border-yellow-500/20;
   }
 }
 
