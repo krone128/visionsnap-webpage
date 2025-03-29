@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const Portfolio: React.FC = () => {
   const projects = [
@@ -60,19 +62,55 @@ const Portfolio: React.FC = () => {
     }
   ];
 
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold mb-4">Our Portfolio</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Explore our innovative XR solutions that are transforming industries and creating immersive experiences.
-        </p>
-      </div>
+  const projectsRef = useRef(null);
+  const ctaRef = useRef(null);
+  const projectsInView = useInView(projectsRef, { once: true, margin: "-100px" });
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="container mx-auto px-4 py-12"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-16"
+      >
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-4xl font-bold mb-4"
+        >
+          Our Portfolio
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-xl text-gray-600 max-w-3xl mx-auto"
+        >
+          Explore our innovative XR solutions that are transforming industries and creating immersive experiences.
+        </motion.p>
+      </motion.div>
+
+      <motion.div 
+        ref={projectsRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={projectsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
         {projects.map((project, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 30 }}
+            animate={projectsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.2 * (index + 1) }}
             className="group relative overflow-hidden bg-white rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
           >
             {/* Image Container with Clip Path */}
@@ -108,21 +146,44 @@ const Portfolio: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Call to Action */}
-      <div className="mt-16 text-center">
-        <h2 className="text-3xl font-bold mb-6">Ready to Create Your XR Experience?</h2>
-        <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+      <motion.div 
+        ref={ctaRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8 }}
+        className="mt-16 text-center"
+      >
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-3xl font-bold mb-6"
+        >
+          Ready to Create Your XR Experience?
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-gray-600 mb-8 max-w-2xl mx-auto"
+        >
           Let's discuss how we can bring your vision to life with cutting-edge XR technology.
-        </p>
-        <button className="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-300">
+        </motion.p>
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-300"
+        >
           Start Your Project
-        </button>
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 };
 
