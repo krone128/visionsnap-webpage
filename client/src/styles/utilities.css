@@ -4,15 +4,15 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200;
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 text-black hover:shadow-lg hover:shadow-yellow-500/50;
   }
 
   .btn-secondary {
-    @apply bg-white text-gray-700 border-gray-300 hover:bg-gray-50 focus:ring-primary-500;
+    @apply bg-black text-yellow-400 border border-yellow-500/30 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-500/20;
   }
 
   .btn-danger {
@@ -32,7 +32,7 @@
   }
 
   .btn-link {
-    @apply text-primary-600 hover:text-primary-700 focus:ring-primary-500;
+    @apply text-yellow-400 hover:text-yellow-300 transition-colors duration-300;
   }
 
   .btn-sm {
@@ -77,11 +77,23 @@
   }
 
   .input {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+    @apply block w-full rounded-md border-yellow-500/30 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 sm:text-sm bg-black text-gray-100;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-lg overflow-hidden;
+    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg hover:shadow-yellow-500/20 transition-all duration-300;
+  }
+
+  .card-header {
+    @apply px-6 py-4 border-b border-yellow-500/20;
+  }
+
+  .card-body {
+    @apply px-6 py-4;
+  }
+
+  .card-footer {
+    @apply px-6 py-4 border-t border-yellow-500/20;
   }
 
   .section-title {
@@ -109,11 +121,19 @@
   }
 
   .link {
-    @apply text-primary-600 hover:text-primary-700 underline;
+    @apply text-yellow-400 hover:text-yellow-300 transition-colors duration-300;
+  }
+
+  .link-underline {
+    @apply text-yellow-400 hover:text-yellow-300 underline;
   }
 
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-yellow {
+    @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/30;
   }
 
   .badge-primary {
@@ -134,5 +154,49 @@
 
   .badge-danger {
     @apply bg-red-100 text-red-800;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-2 bg-black border border-yellow-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-gray-100;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-300 mb-1;
+  }
+
+  .form-error {
+    @apply text-red-500 text-sm mt-1;
+  }
+
+  .panel {
+    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg overflow-hidden;
+  }
+
+  .text-yellow {
+    @apply text-yellow-400 hover:text-yellow-300;
+  }
+
+  .text-yellow-underline {
+    @apply text-yellow-400 hover:text-yellow-300 underline;
+  }
+
+  .spinner {
+    @apply animate-spin rounded-full border-2 border-yellow-500 border-t-transparent;
+  }
+
+  .glass {
+    @apply bg-black/80 backdrop-blur-sm border border-yellow-500/20 rounded-lg;
+  }
+
+  .metallic-border {
+    @apply border border-yellow-500/30 hover:border-yellow-400 transition-colors duration-300;
+  }
+
+  .glow {
+    @apply animate-glow;
+  }
+
+  .floating {
+    @apply animate-float;
   }
 } 

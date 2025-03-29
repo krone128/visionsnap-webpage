@@ -61,6 +61,21 @@ services:
     depends_on:
       - server
 
+  client-dev:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - WDS_SOCKET_PORT=0
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server
+
 volumes:
   postgres_data:
 

@@ -14,6 +14,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
 
   return (
     <Card 
+      className="card"
       sx={{ 
         height: '100%', 
         display: 'flex', 
@@ -21,7 +22,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
         transition: 'transform 0.2s, box-shadow 0.2s',
         '&:hover': {
           transform: 'translateY(-4px)',
-          boxShadow: 6
+          boxShadow: '0 0 20px rgba(234, 179, 8, 0.3)'
         }
       }}
     >
@@ -31,6 +32,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           height="200"
           image={post.imageUrl}
           alt={post.title}
+          className="metallic-border"
           sx={{
             objectFit: 'cover',
             transition: 'transform 0.3s',
@@ -45,11 +47,11 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           gutterBottom 
           variant="h5" 
           component="h2"
+          className="text-yellow-400 hover:text-yellow-300"
           sx={{
             fontWeight: 600,
-            color: 'primary.main',
             '&:hover': {
-              color: 'primary.dark'
+              textDecoration: 'underline'
             }
           }}
         >
@@ -57,7 +59,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
         </Typography>
         <Typography 
           variant="body2" 
-          color="text.secondary" 
+          className="text-gray-300"
           paragraph
           sx={{
             display: '-webkit-box',
@@ -75,13 +77,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
               key={tag}
               label={tag}
               size="small"
-              sx={{
-                backgroundColor: 'primary.light',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: 'primary.main'
-                }
-              }}
+              className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/30"
             />
           ))}
         </Stack>
@@ -92,23 +88,23 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           alignItems: 'center', 
           gap: 2,
           borderTop: '1px solid',
-          borderColor: 'divider',
+          borderColor: 'rgba(234, 179, 8, 0.2)',
           pt: 2
         }}>
           <Avatar 
+            className="bg-yellow-500/20 border border-yellow-500/30"
             sx={{ 
-              bgcolor: 'primary.main',
               width: 32,
               height: 32
             }}
           >
-            <Person />
+            <Person className="text-yellow-400" />
           </Avatar>
           <Box sx={{ flex: 1 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+            <Typography variant="subtitle2" className="text-gray-200" sx={{ fontWeight: 600 }}>
               {post.author.name}
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }} className="text-gray-400">
               <CalendarToday sx={{ fontSize: 16 }} />
               <Typography variant="caption">
                 {new Date(post.createdAt).toLocaleDateString('en-US', {
@@ -121,12 +117,11 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           </Box>
           <Link 
             href={`/blog/${post.id}`} 
+            className="text-yellow-400 hover:text-yellow-300"
             sx={{
-              color: 'primary.main',
               textDecoration: 'none',
               fontWeight: 500,
               '&:hover': {
-                color: 'primary.dark',
                 textDecoration: 'underline'
               }
             }}

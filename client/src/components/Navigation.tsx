@@ -11,7 +11,7 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-black/80 border-b border-yellow-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -21,13 +21,13 @@ const Navigation: React.FC = () => {
                 src="/logo.svg"
                 alt="VisionSnap"
               />
-              <span className="ml-2 text-xl font-bold text-primary-600">VisionSnap</span>
+              <span className="ml-2 text-xl font-bold text-yellow-500">VisionSnap</span>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link
                 to="/"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/') ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700'
+                  isActive('/') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
                 }`}
               >
                 Home
@@ -35,7 +35,7 @@ const Navigation: React.FC = () => {
               <Link
                 to="/portfolio"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/portfolio') ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700'
+                  isActive('/portfolio') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
                 }`}
               >
                 Portfolio
@@ -43,9 +43,7 @@ const Navigation: React.FC = () => {
               <Link
                 to="/solutions"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/solutions')
-                    ? 'border-primary-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  isActive('/solutions') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
                 }`}
               >
                 Solutions
@@ -53,9 +51,7 @@ const Navigation: React.FC = () => {
               <Link
                 to="/about"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/about')
-                    ? 'border-primary-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  isActive('/about') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
                 }`}
               >
                 About
@@ -63,9 +59,7 @@ const Navigation: React.FC = () => {
               <Link
                 to="/blog"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/blog')
-                    ? 'border-primary-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  isActive('/blog') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
                 }`}
               >
                 Blog
@@ -73,9 +67,7 @@ const Navigation: React.FC = () => {
               <Link
                 to="/contact"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/contact')
-                    ? 'border-primary-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  isActive('/contact') ? 'border-yellow-500 text-yellow-400' : 'border-transparent text-gray-400 hover:text-yellow-400 hover:border-yellow-500/30'
                 }`}
               >
                 Contact
@@ -86,7 +78,7 @@ const Navigation: React.FC = () => {
             {user ? (
               <div className="flex items-center space-x-4">
                 {(user.role === 'admin' || user.role === 'editor') && (
-                  <Link to="/admin" className="text-gray-500 hover:text-gray-700">
+                  <Link to="/admin" className="text-gray-400 hover:text-yellow-400">
                     Admin
                   </Link>
                 )}
@@ -95,14 +87,14 @@ const Navigation: React.FC = () => {
                     <img
                       src={user.picture}
                       alt={user.name}
-                      className="h-8 w-8 rounded-full"
+                      className="h-8 w-8 rounded-full border border-yellow-500/30"
                     />
                   )}
-                  <span className="text-gray-700">{user.name}</span>
+                  <span className="text-gray-300">{user.name}</span>
                 </div>
                 <button
                   onClick={logout}
-                  className="btn btn-secondary"
+                  className="btn"
                 >
                   Sign Out
                 </button>
@@ -110,7 +102,7 @@ const Navigation: React.FC = () => {
             ) : (
               <button
                 onClick={login}
-                className="btn btn-primary"
+                className="btn"
               >
                 Sign In
               </button>

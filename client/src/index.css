@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,67 +12,104 @@
   }
 
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-black text-gray-100;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
+    letter-spacing: 0.02em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600;
+    letter-spacing: 0.1em;
   }
 
   h2 {
-    @apply text-3xl font-bold;
+    @apply text-3xl font-bold text-yellow-500;
+    letter-spacing: 0.08em;
   }
 
   h3 {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold text-yellow-400;
+    letter-spacing: 0.06em;
   }
 
   h4 {
-    @apply text-xl font-bold;
+    @apply text-xl font-bold text-gray-200;
+    letter-spacing: 0.04em;
   }
 
   h5 {
-    @apply text-lg font-bold;
+    @apply text-lg font-bold text-gray-300;
+    letter-spacing: 0.03em;
   }
 
   h6 {
-    @apply text-base font-bold;
+    @apply text-base font-bold text-gray-400;
+    letter-spacing: 0.02em;
   }
 
   p {
-    @apply text-gray-600;
+    @apply text-gray-300;
+    line-height: 1.7;
   }
 
   a {
-    @apply text-primary-600 hover:text-primary-700;
+    @apply text-yellow-400 hover:text-yellow-300 transition-colors duration-300;
+    letter-spacing: 0.03em;
   }
 }
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 text-black hover:shadow-lg hover:shadow-yellow-500/50;
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700;
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 text-black hover:shadow-lg hover:shadow-yellow-500/50;
   }
 
   .btn-secondary {
-    @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 text-black hover:shadow-lg hover:shadow-yellow-500/50;
   }
 
   .input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-4 py-2 bg-black border border-yellow-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-gray-100;
+    font-family: 'Space Grotesk', sans-serif;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg hover:shadow-yellow-500/20 transition-all duration-300;
+  }
+
+  .metallic-border {
+    @apply border border-yellow-500/30 hover:border-yellow-400 transition-colors duration-300;
+  }
+
+  .glow-effect {
+    @apply animate-glow;
+  }
+
+  .floating {
+    @apply animate-float;
+  }
+
+  .glass-panel {
+    @apply bg-black/80 border border-yellow-500/20 rounded-lg;
   }
 
   .prose {
@@ -78,27 +117,31 @@
   }
 
   .prose h1 {
-    @apply text-4xl font-bold mb-4;
+    @apply text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600;
+    letter-spacing: 0.1em;
   }
 
   .prose h2 {
-    @apply text-3xl font-bold mb-4;
+    @apply text-3xl font-bold mb-4 text-yellow-500;
+    letter-spacing: 0.08em;
   }
 
   .prose h3 {
-    @apply text-2xl font-bold mb-4;
+    @apply text-2xl font-bold mb-4 text-yellow-400;
+    letter-spacing: 0.06em;
   }
 
   .prose p {
-    @apply mb-4;
+    @apply mb-4 text-gray-300;
+    line-height: 1.7;
   }
 
   .prose ul {
-    @apply list-disc list-inside mb-4;
+    @apply list-disc list-inside mb-4 text-gray-300;
   }
 
   .prose ol {
-    @apply list-decimal list-inside mb-4;
+    @apply list-decimal list-inside mb-4 text-gray-300;
   }
 
   .prose li {
@@ -106,23 +149,24 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-primary-500 pl-4 italic my-4;
+    @apply border-l-4 border-yellow-500 pl-4 italic my-4 text-gray-300;
   }
 
   .prose code {
-    @apply bg-gray-100 rounded px-1 py-0.5;
+    @apply bg-black rounded px-1 py-0.5 text-yellow-400;
+    font-family: 'Fira Code', monospace;
   }
 
   .prose pre {
-    @apply bg-gray-100 rounded p-4 overflow-x-auto my-4;
+    @apply bg-black rounded p-4 overflow-x-auto my-4 border border-yellow-500/20;
   }
 
   .prose img {
-    @apply rounded-lg my-4;
+    @apply rounded-lg my-4 border border-yellow-500/20;
   }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
