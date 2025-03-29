@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../config/database';
 import { Blog } from '../entities/Blog';
 import { User } from '../entities/User';
 import { authenticateToken } from '../middleware/auth';
@@ -16,14 +16,24 @@ const upload = multer({ storage: multer.memoryStorage() });
 // Get all published blog posts
 router.get('/', async (req: Request, res: Response) => {
   try {
+    console.log('Fetching blog posts...');
     const posts = await blogRepository.find({
       where: { published: true },
       relations: ['author'],
       order: { createdAt: 'DESC' }
     });
+    console.log(`Found ${posts.length} blog posts`);
+    if (posts.length === 0) {
+      return res.json([]); // Return empty array instead of error
+    }
     res.json(posts);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching blog posts' });
+    console.error('Error in GET /api/blog:', error);
+    res.status(500).json({ 
+      message: 'Error fetching blog posts',
+      error: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
+    });
   }
 });
 
