@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { useTheme } from '../contexts/ThemeContext';
 
 const GeometricMesh: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -8,6 +9,7 @@ const GeometricMesh: React.FC = () => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const deerRef = useRef<THREE.Group | null>(null);
   const scrollRef = useRef(0);
+  const { theme } = useTheme();
 
   // Custom shader material
   const vertexShader = `
@@ -50,6 +52,7 @@ const GeometricMesh: React.FC = () => {
   const fragmentShader = `
     uniform float time;
     uniform float scroll;
+    uniform bool isDarkTheme;
     varying vec2 vUv;
     varying vec3 vPosition;
     varying vec3 vNormal;
@@ -69,13 +72,27 @@ const GeometricMesh: React.FC = () => {
       }
     }
 
+    vec3 coldColor(float t) {
+      // Create cold color palette (sky blue, blue, navy)
+      vec3 skyBlue = vec3(0.529, 0.808, 0.922);  // Sky Blue
+      vec3 blue = vec3(0.0, 0.478, 0.8);         // Blue
+      vec3 navy = vec3(0.0, 0.0, 0.502);         // Navy
+      
+      // Smoothly interpolate between colors
+      if (t < 0.5) {
+        return mix(skyBlue, blue, t * 2.0);
+      } else {
+        return mix(blue, navy, (t - 0.5) * 2.0);
+      }
+    }
+
     void main() {
       // Create breathing effect with random variation
       float breathing = sin(time * 0.5 + vRandom * 6.28) * 0.5 + 0.5;
       
-      // Create UV-based color shift with random variation (restricted to warm colors)
+      // Create UV-based color shift with random variation
       float hue = fract(vUv.x + time * 0.05 + vRandom * 0.2);
-      vec3 color = warmColor(hue);
+      vec3 color = isDarkTheme ? warmColor(hue) : coldColor(hue);
       
       // Create circular fade from center with random variation
       vec2 center = vec2(0.5, 0.5);
@@ -131,7 +148,8 @@ const GeometricMesh: React.FC = () => {
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        scroll: { value: 0 }
+        scroll: { value: 0 },
+        isDarkTheme: { value: theme === 'dark' }
       },
       vertexShader,
       fragmentShader,
@@ -174,6 +192,7 @@ const GeometricMesh: React.FC = () => {
         const material = mesh.material as THREE.ShaderMaterial;
         material.uniforms.time.value += 0.01;
         material.uniforms.scroll.value = scrollRef.current;
+        material.uniforms.isDarkTheme.value = theme === 'dark';
         
         // Gentle floating motion
         mesh.position.y = Math.sin(material.uniforms.time.value * 0.5) * 0.2;
@@ -199,7 +218,7 @@ const GeometricMesh: React.FC = () => {
         containerRef.current.removeChild(rendererRef.current.domElement);
       }
     };
-  }, []);
+  }, [theme]);
 
   return (
     <div

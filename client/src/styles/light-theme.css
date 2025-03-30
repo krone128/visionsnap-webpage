@@ -1,0 +1,40 @@
+/* Light theme variables */
+.theme-light {
+  /* Colors */
+  --color-primary: theme('colors.sky.600');
+  --color-primary-hover: theme('colors.sky.700');
+  --color-primary-dark: theme('colors.sky.800');
+  --color-primary-light: theme('colors.sky.500');
+  --color-border: theme('colors.sky.600 / 30%');
+  --color-border-hover: theme('colors.sky.500 / 40%');
+
+  /* Shadows */
+  --shadow-primary: 0 0 20px theme('colors.sky.600 / 20%');
+  --shadow-hover: 0 0 30px theme('colors.sky.600 / 30%');
+
+  --color-bg: theme('colors.white');
+  --color-bg-80: theme('colors.white / 80%');
+  --color-bg-gradient: theme('colors.gray.50');
+  --color-text: theme('colors.gray.900');
+  --color-text-secondary: theme('colors.gray.700');
+  --color-text-muted: theme('colors.gray.600');
+
+  /* Status Colors */
+  --color-error: theme('colors.red.600');
+  --color-error-hover: theme('colors.red.700');
+  --color-success: theme('colors.green.600');
+  --color-success-hover: theme('colors.green.700');
+  --color-warning: theme('colors.yellow.600');
+  --color-warning-hover: theme('colors.yellow.700');
+  --color-info: theme('colors.blue.600');
+  --color-info-hover: theme('colors.blue.700');
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
+  --gradient-bg: linear-gradient(to bottom, var(--color-bg), var(--color-bg-gradient));
+}
+
+/* Set initial theme */
+:root {
+  color-scheme: light dark;
+} 
