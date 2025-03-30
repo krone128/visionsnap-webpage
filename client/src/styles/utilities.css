@@ -8,31 +8,31 @@
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 text-black hover:shadow-lg hover:shadow-yellow-500/50;
+    @apply bg-gradient-primary text-bg hover:shadow-hover;
   }
 
   .btn-secondary {
-    @apply bg-black text-yellow-400 border border-yellow-500/30 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-500/20;
+    @apply bg-bg text-primary border border-primary-30 hover:border-primary hover:shadow-hover;
   }
 
   .btn-danger {
-    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+    @apply bg-error text-white hover:bg-error-hover focus:ring-error;
   }
 
   .btn-success {
-    @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+    @apply bg-success text-white hover:bg-success-hover focus:ring-success;
   }
 
   .btn-warning {
-    @apply bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500;
+    @apply bg-warning text-white hover:bg-warning-hover focus:ring-warning;
   }
 
   .btn-info {
-    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+    @apply bg-info text-white hover:bg-info-hover focus:ring-info;
   }
 
   .btn-link {
-    @apply text-yellow-400 hover:text-yellow-300 transition-colors duration-300;
+    @apply text-primary hover:text-primary-hover transition-colors duration-300;
   }
 
   .btn-sm {
@@ -77,15 +77,15 @@
   }
 
   .input {
-    @apply block w-full rounded-md border-yellow-500/30 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 sm:text-sm bg-black text-gray-100;
+    @apply block w-full rounded-md border-primary-30 shadow-sm focus:border-primary focus:ring-primary sm:text-sm bg-bg text-text;
   }
 
   .card {
-    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg hover:shadow-yellow-500/20 transition-all duration-300;
+    @apply bg-bg-80 rounded-lg border border-primary-20 shadow-lg hover:shadow-hover transition-all duration-300;
   }
 
   .card-header {
-    @apply px-6 py-4 border-b border-yellow-500/20;
+    @apply px-6 py-4 border-b border-primary-20;
   }
 
   .card-body {
@@ -93,15 +93,15 @@
   }
 
   .card-footer {
-    @apply px-6 py-4 border-t border-yellow-500/20;
+    @apply px-6 py-4 border-t border-primary-20;
   }
 
   .section-title {
-    @apply text-3xl font-bold text-gray-900 mb-8;
+    @apply text-3xl font-bold text-text mb-8;
   }
 
   .section-subtitle {
-    @apply text-xl text-gray-600 mb-4;
+    @apply text-xl text-text-secondary mb-4;
   }
 
   .container {
@@ -116,80 +116,75 @@
     @apply flex items-center justify-center;
   }
 
-  .text-primary {
-    @apply text-primary-600 hover:text-primary-700;
-  }
-
   .link {
-    @apply text-yellow-400 hover:text-yellow-300 transition-colors duration-300;
+    @apply text-primary hover:text-primary-hover transition-colors duration-300;
   }
 
   .link-underline {
-    @apply text-yellow-400 hover:text-yellow-300 underline;
+    @apply text-primary hover:text-primary-hover underline;
   }
 
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
 
-  .badge-yellow {
-    @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/30;
-  }
-
   .badge-primary {
-    @apply bg-primary-100 text-primary-800;
+    @apply bg-primary-20 text-primary border border-primary-30;
   }
 
   .badge-secondary {
-    @apply bg-gray-100 text-gray-800;
+    @apply bg-text-secondary text-text;
   }
 
   .badge-success {
-    @apply bg-green-100 text-green-800;
+    @apply bg-success-20 text-success border border-success-30;
   }
 
   .badge-warning {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply bg-warning-20 text-warning border border-warning-30;
   }
 
-  .badge-danger {
-    @apply bg-red-100 text-red-800;
+  .badge-error {
+    @apply bg-error-20 text-error border border-error-30;
   }
 
   .form-input {
-    @apply w-full px-4 py-2 bg-black border border-yellow-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-gray-100;
+    @apply block w-full rounded-md shadow-sm focus:ring-primary sm:text-sm bg-bg text-text py-3 transition-all duration-300;
+    border: 1px solid var(--color-border);
+  }
+
+  .form-input:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+  }
+
+  .form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-hover);
   }
 
   .form-label {
-    @apply block text-sm font-medium text-gray-300 mb-1;
+    @apply block text-sm font-medium text-text-secondary mb-1;
   }
 
   .form-error {
-    @apply text-red-500 text-sm mt-1;
+    @apply text-error text-sm mt-1;
   }
 
   .panel {
-    @apply bg-black/80 rounded-lg border border-yellow-500/20 shadow-lg overflow-hidden;
-  }
-
-  .text-yellow {
-    @apply text-yellow-400 hover:text-yellow-300;
-  }
-
-  .text-yellow-underline {
-    @apply text-yellow-400 hover:text-yellow-300 underline;
+    @apply bg-bg-80 rounded-lg border border-primary-20 shadow-lg overflow-hidden;
   }
 
   .spinner {
-    @apply animate-spin rounded-full border-2 border-yellow-500 border-t-transparent;
+    @apply animate-spin rounded-full border-2 border-primary border-t-transparent;
   }
 
   .glass {
-    @apply bg-black/80 backdrop-blur-sm border border-yellow-500/20 rounded-lg;
+    @apply bg-bg-80 backdrop-blur-sm border border-primary-20 rounded-lg;
   }
 
   .metallic-border {
-    @apply border border-yellow-500/30 hover:border-yellow-400 transition-colors duration-300;
+    @apply border border-primary-30 hover:border-primary transition-colors duration-300;
   }
 
   .glow {

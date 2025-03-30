@@ -109,7 +109,7 @@ const EditBlogPost: React.FC = () => {
   if (loading) {
     return (
       <div className="flex-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -118,7 +118,7 @@ const EditBlogPost: React.FC = () => {
     return (
       <div className="container py-12">
         <div className="bg-red-50 border border-red-200 rounded-md p-4">
-          <p className="text-red-700">{error || 'Post not found'}</p>
+          <p className="text-error">{error || 'Post not found'}</p>
         </div>
       </div>
     );
@@ -140,7 +140,7 @@ const EditBlogPost: React.FC = () => {
       >
         <motion.h1 
           variants={headerTransitionVariant}
-          className="text-4xl font-bold text-yellow-400 mb-8"
+          className="text-4xl font-bold text-primary mb-8"
         >
           Edit Blog Post
         </motion.h1>
@@ -153,7 +153,7 @@ const EditBlogPost: React.FC = () => {
           className="space-y-6"
         >
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="title" className="block text-sm font-medium text-secondary">
               Title
             </label>
             <input
@@ -162,16 +162,16 @@ const EditBlogPost: React.FC = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className={`form-input mt-1 ${validationErrors.title ? 'border-red-500' : ''}`}
+              className={`form-input mt-1 ${validationErrors.title ? 'border-error' : ''}`}
               required
             />
             {validationErrors.title && (
-              <p className="mt-1 text-sm text-red-600">{validationErrors.title}</p>
+              <p className="mt-1 text-sm text-error">{validationErrors.title}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="content" className="block text-sm font-medium text-secondary">
               Content
             </label>
             <textarea
@@ -180,16 +180,16 @@ const EditBlogPost: React.FC = () => {
               value={formData.content}
               onChange={handleChange}
               rows={10}
-              className={`form-input mt-1 ${validationErrors.content ? 'border-red-500' : ''}`}
+              className={`form-input mt-1 ${validationErrors.content ? 'border-error' : ''}`}
               required
             />
             {validationErrors.content && (
-              <p className="mt-1 text-sm text-red-600">{validationErrors.content}</p>
+              <p className="mt-1 text-sm text-error">{validationErrors.content}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="imageUrl" className="block text-sm font-medium text-secondary">
               Image URL (optional)
             </label>
             <input
@@ -198,15 +198,15 @@ const EditBlogPost: React.FC = () => {
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              className={`form-input mt-1 ${validationErrors.imageUrl ? 'border-red-500' : ''}`}
+              className={`form-input mt-1 ${validationErrors.imageUrl ? 'border-error' : ''}`}
             />
             {validationErrors.imageUrl && (
-              <p className="mt-1 text-sm text-red-600">{validationErrors.imageUrl}</p>
+              <p className="mt-1 text-sm text-error">{validationErrors.imageUrl}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="videoUrl" className="block text-sm font-medium text-secondary">
               Video URL (optional)
             </label>
             <input
@@ -215,10 +215,10 @@ const EditBlogPost: React.FC = () => {
               name="videoUrl"
               value={formData.videoUrl}
               onChange={handleChange}
-              className={`form-input mt-1 ${validationErrors.videoUrl ? 'border-red-500' : ''}`}
+              className={`form-input mt-1 ${validationErrors.videoUrl ? 'border-error' : ''}`}
             />
             {validationErrors.videoUrl && (
-              <p className="mt-1 text-sm text-red-600">{validationErrors.videoUrl}</p>
+              <p className="mt-1 text-sm text-error">{validationErrors.videoUrl}</p>
             )}
           </div>
 

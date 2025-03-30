@@ -59,13 +59,13 @@ const Solutions: React.FC = () => {
       <div className="text-center mb-12">
         <motion.h1 
           variants={headerTransitionVariant}
-          className="text-4xl font-bold text-yellow-400 mb-4"
+          className="text-4xl font-bold text-primary mb-4"
         >
           Our Solutions
         </motion.h1>
         <motion.p 
           variants={descriptionTransitionVariant}
-          className="text-xl text-gray-300 max-w-2xl mx-auto"
+          className="text-xl text-secondary max-w-2xl mx-auto"
         >
           Comprehensive AR and computer vision solutions for your business
         </motion.p>
@@ -84,12 +84,12 @@ const Solutions: React.FC = () => {
             className="card"
           >
             <div className="p-6">
-              <h2 className="text-2xl font-bold mb-4 text-yellow-400">{solution.title}</h2>
-              <p className="text-gray-300 mb-6">{solution.description}</p>
+              <h2 className="text-2xl font-bold mb-4 text-primary">{solution.title}</h2>
+              <p className="text-secondary mb-6">{solution.description}</p>
               <ul className="space-y-3">
                 {solution.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-gray-300">
-                    <span className="text-yellow-400 mr-2">✓</span>
+                  <li key={featureIndex} className="flex items-center text-secondary">
+                    <span className="text-primary mr-2">✓</span>
                     {feature}
                   </li>
                 ))}

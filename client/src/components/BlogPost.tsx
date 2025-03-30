@@ -75,14 +75,14 @@ const BlogPost: React.FC<BlogPostProps> = ({
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-2">
           {preview ? (
-            <Link to={`/blog/${id}`} className="text-yellow-400 hover:text-yellow-300">
+            <Link to={`/blog/${id}`} className="text-primary hover:text-primary-hover transition-colors">
               {title}
             </Link>
           ) : (
-            <span className="text-yellow-400">{title}</span>
+            <span className="text-primary">{title}</span>
           )}
         </h2>
-        <div className="flex items-center text-gray-400 text-sm mb-4">
+        <div className="flex items-center text-secondary text-sm mb-4">
           <span>{author.name}</span>
           <span className="mx-2">•</span>
           <span>{formatDate(createdAt)}</span>
@@ -94,7 +94,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
         {preview && (
           <Link
             to={`/blog/${id}`}
-            className="inline-block mt-4 text-yellow-400 hover:text-yellow-300"
+            className="inline-block mt-4 text-primary hover:text-primary-hover transition-colors"
           >
             Read more →
           </Link>

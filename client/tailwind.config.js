@@ -7,6 +7,13 @@ module.exports = {
     extend: {
       colors: {
         primary: {
+          DEFAULT: 'var(--color-primary)',
+          hover: 'var(--color-primary-hover)',
+          light: 'var(--color-primary-light)',
+          dark: 'var(--color-primary-dark)',
+          '30': 'var(--color-primary-30)',
+          '20': 'var(--color-primary-20)',
+          '10': 'var(--color-primary-10)',
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
@@ -39,11 +46,54 @@ module.exports = {
           blue: '#00f3ff',
           purple: '#bc13fe',
           pink: '#ff2a6d',
-        }
+        },
+        bg: {
+          DEFAULT: 'var(--color-bg)',
+          '80': 'var(--color-bg-80)',
+        },
+        text: {
+          DEFAULT: 'var(--color-text)',
+          secondary: 'var(--color-text-secondary)',
+          muted: 'var(--color-text-muted)',
+        },
+        error: {
+          DEFAULT: 'var(--color-error)',
+          hover: 'var(--color-error-hover)',
+          '30': 'var(--color-error-30)',
+          '20': 'var(--color-error-20)',
+          '10': 'var(--color-error-10)',
+        },
+        success: {
+          DEFAULT: 'var(--color-success)',
+          hover: 'var(--color-success-hover)',
+          '30': 'var(--color-success-30)',
+          '20': 'var(--color-success-20)',
+          '10': 'var(--color-success-10)',
+        },
+        warning: {
+          DEFAULT: 'var(--color-warning)',
+          hover: 'var(--color-warning-hover)',
+          '30': 'var(--color-warning-30)',
+          '20': 'var(--color-warning-20)',
+          '10': 'var(--color-warning-10)',
+        },
+        info: {
+          DEFAULT: 'var(--color-info)',
+          hover: 'var(--color-info-hover)',
+          '30': 'var(--color-info-30)',
+          '20': 'var(--color-info-20)',
+          '10': 'var(--color-info-10)',
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-primary': 'var(--gradient-primary)',
+        'gradient-bg': 'var(--gradient-bg)',
+      },
+      boxShadow: {
+        'primary': 'var(--shadow-primary)',
+        'hover': 'var(--shadow-hover)',
       },
       animation: {
         'glow': 'glow 2s ease-in-out infinite alternate',

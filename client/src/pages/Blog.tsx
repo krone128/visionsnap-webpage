@@ -74,13 +74,13 @@ const Blog: React.FC = () => {
       <div className="text-center mb-12">
         <motion.h1 
           variants={headerTransitionVariant}
-          className="text-4xl font-bold text-yellow-400 mb-4"
+          className="text-4xl font-bold mb-4"
         >
           Blog
         </motion.h1>
         <motion.p 
           variants={descriptionTransitionVariant}
-          className="text-xl text-gray-300 max-w-2xl mx-auto"
+          className="text-xl max-w-2xl mx-auto"
         >
           Insights and updates from our team
         </motion.p>
@@ -89,19 +89,23 @@ const Blog: React.FC = () => {
         variants={staggerContainerVariant}
         initial="initial"
         animate="animate"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 gap-8 max-w-3xl mx-auto"
       >
         {posts && posts.length > 0 ? (
           posts.map((post, index) => (
             <motion.div
               key={post.id}
               variants={cardTransitionVariant}
+              className="w-full"
             >
               <BlogPostCard post={post} />
             </motion.div>
           ))
         ) : (
-          <Typography variant="body1" color="textSecondary">
+          <Typography 
+            variant="body1" 
+            className="text-secondary"
+          >
             No blog posts available.
           </Typography>
         )}

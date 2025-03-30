@@ -48,13 +48,13 @@ const Contact: React.FC = () => {
       <div className="text-center mb-12">
         <motion.h1 
           variants={headerTransitionVariant}
-          className="text-4xl font-bold text-yellow-400 mb-4"
+          className="text-4xl font-bold text-primary mb-4"
         >
           Contact Us
         </motion.h1>
         <motion.p 
           variants={descriptionTransitionVariant}
-          className="text-xl text-gray-300 max-w-2xl mx-auto"
+          className="text-xl text-secondary max-w-2xl mx-auto"
         >
           Get in touch with our team to discuss your project
         </motion.p>
@@ -72,26 +72,26 @@ const Contact: React.FC = () => {
           animate={infoInView ? "animate" : "initial"}
           className="glass p-6"
         >
-          <h2 className="text-2xl font-bold mb-4 text-yellow-400">Get in Touch</h2>
-          <p className="text-gray-300 mb-6">
+          <h2 className="text-2xl font-bold mb-4 text-primary">Get in Touch</h2>
+          <p className="text-secondary mb-6">
             Have questions about our AR and computer vision solutions? We're here to help.
             Fill out the form and we'll get back to you as soon as possible.
           </p>
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-semibold text-yellow-400 mb-2">Address</h3>
-              <p className="text-gray-300">123 Tech Street</p>
-              <p className="text-gray-300">San Francisco, CA 94105</p>
+              <h3 className="text-lg font-semibold text-primary mb-2">Address</h3>
+              <p className="text-secondary">123 Tech Street</p>
+              <p className="text-secondary">San Francisco, CA 94105</p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-yellow-400 mb-2">Contact</h3>
-              <p className="text-gray-300">Email: contact@visionsnap.com</p>
-              <p className="text-gray-300">Phone: (555) 123-4567</p>
+              <h3 className="text-lg font-semibold text-primary mb-2">Contact</h3>
+              <p className="text-secondary">Email: contact@visionsnap.com</p>
+              <p className="text-secondary">Phone: (555) 123-4567</p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-yellow-400 mb-2">Hours</h3>
-              <p className="text-gray-300">Monday - Friday: 9:00 AM - 6:00 PM</p>
-              <p className="text-gray-300">Saturday - Sunday: Closed</p>
+              <h3 className="text-lg font-semibold text-primary mb-2">Hours</h3>
+              <p className="text-secondary">Monday - Friday: 9:00 AM - 6:00 PM</p>
+              <p className="text-secondary">Saturday - Sunday: Closed</p>
             </div>
           </div>
         </motion.div>

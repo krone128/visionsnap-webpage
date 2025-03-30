@@ -68,7 +68,7 @@ const BlogPostDetail: React.FC = () => {
   if (loading) {
     return (
       <div className="flex-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -77,7 +77,7 @@ const BlogPostDetail: React.FC = () => {
     return (
       <div className="container py-12">
         <div className="bg-red-50 border border-red-200 rounded-md p-4">
-          <p className="text-red-700">{error || 'Post not found'}</p>
+          <p className="text-error">{error || 'Post not found'}</p>
         </div>
       </div>
     );
@@ -97,7 +97,7 @@ const BlogPostDetail: React.FC = () => {
         animate="animate"
         className="flex justify-between items-center mb-8"
       >
-        <Link to="/blog" className="text-yellow-400 hover:text-yellow-300">
+        <Link to="/blog" className="text-primary hover:text-primary-hover transition-colors">
           ← Back to Blog
         </Link>
         {user && (user.role === 'admin' || user.role === 'editor') && (
@@ -128,19 +128,19 @@ const BlogPostDetail: React.FC = () => {
           <img
             src={post.imageUrl}
             alt={post.title}
-            className="w-full h-96 object-cover"
+            className="w-full h-96 object-cover metallic-border"
           />
         )}
         <div className="p-8">
           <motion.h1 
             variants={headerTransitionVariant}
-            className="text-4xl font-bold text-yellow-400 mb-4"
+            className="text-4xl font-bold text-primary mb-4"
           >
             {post.title}
           </motion.h1>
           <motion.div 
             variants={descriptionTransitionVariant}
-            className="flex items-center text-gray-300 mb-8"
+            className="flex items-center text-secondary mb-8"
           >
             <span>{post.author}</span>
             <span className="mx-2">•</span>
@@ -152,7 +152,7 @@ const BlogPostDetail: React.FC = () => {
             className="prose prose-lg max-w-none"
           >
             {post.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4 text-gray-300">
+              <p key={index} className="mb-4 text-secondary">
                 {paragraph}
               </p>
             ))}
@@ -163,11 +163,11 @@ const BlogPostDetail: React.FC = () => {
               variants={descriptionTransitionVariant}
               className="mt-8"
             >
-              <h2 className="text-2xl font-semibold mb-4 text-yellow-400">Video</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-primary">Video</h2>
               <div className="aspect-w-16 aspect-h-9">
                 <iframe
                   src={post.videoUrl}
-                  className="w-full h-full rounded-lg"
+                  className="w-full h-full rounded-lg metallic-border"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />

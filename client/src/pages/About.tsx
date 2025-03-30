@@ -57,13 +57,13 @@ const About: React.FC = () => {
       >
         <motion.h1 
           variants={headerTransitionVariant}
-          className="text-4xl font-bold mb-6 text-yellow-400"
+          className="text-4xl font-bold mb-6"
         >
           About VisionSnap
         </motion.h1>
         <motion.p 
           variants={descriptionTransitionVariant}
-          className="text-xl text-gray-300 max-w-3xl mx-auto"
+          className="text-xl max-w-3xl mx-auto"
         >
           We're on a mission to revolutionize the way businesses leverage computer vision and AI technology.
         </motion.p>
@@ -75,17 +75,17 @@ const About: React.FC = () => {
         variants={cardTransitionVariant}
         initial="initial"
         animate={missionInView ? "animate" : "initial"}
-        className="card bg-black/80 p-8 mb-16"
+        className="card p-8 mb-16"
       >
         <motion.h2 
           variants={headerTransitionVariant}
-          className="text-3xl font-bold mb-6 text-center text-yellow-400"
+          className="text-3xl font-bold mb-6 text-center"
         >
           Our Mission
         </motion.h2>
         <motion.p 
           variants={descriptionTransitionVariant}
-          className="text-gray-300 text-lg max-w-3xl mx-auto text-center"
+          className="text-lg max-w-3xl mx-auto text-center"
         >
           At VisionSnap, we believe in making advanced computer vision and AI technology accessible to businesses of all sizes.
           Our goal is to help companies transform their operations through innovative solutions that drive efficiency,
@@ -124,8 +124,10 @@ const About: React.FC = () => {
             className="text-center p-6"
           >
             <div className="text-4xl mb-4">{value.icon}</div>
-            <h3 className="text-xl font-semibold mb-2 text-yellow-400">{value.title}</h3>
-            <p className="text-gray-300">{value.description}</p>
+            <h3 className="text-xl font-semibold mb-2">
+              {value.title}
+            </h3>
+            <p>{value.description}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -139,7 +141,7 @@ const About: React.FC = () => {
       >
         <motion.h2 
           variants={headerTransitionVariant}
-          className="text-3xl font-bold text-center mb-12 text-yellow-400"
+          className="text-3xl font-bold text-center mb-12"
         >
           Our Team
         </motion.h2>
@@ -155,9 +157,13 @@ const About: React.FC = () => {
                 alt={member.name}
                 className="w-32 h-32 rounded-full mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold mb-1 text-yellow-400">{member.name}</h3>
-              <p className="text-gray-300 mb-2">{member.role}</p>
-              <p className="text-gray-400">{member.bio}</p>
+              <h3 className="text-xl font-semibold mb-1">
+                {member.name}
+              </h3>
+              <p className="mb-2">
+                {member.role}
+              </p>
+              <p className="text-muted">{member.bio}</p>
             </motion.div>
           ))}
         </div>

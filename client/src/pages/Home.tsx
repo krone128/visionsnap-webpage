@@ -50,13 +50,13 @@ const Home: React.FC = () => {
         >
           <motion.h1 
             variants={headerTransitionVariant}
-            className="text-5xl font-bold mb-6 text-yellow-400"
+            className="text-5xl font-bold mb-6"
           >
             VisionSnap
           </motion.h1>
           <motion.p 
             variants={descriptionTransitionVariant}
-            className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            className="text-xl mb-8 max-w-2xl mx-auto"
           >
             Empowering businesses with cutting-edge AR and computer vision solutions.
           </motion.p>
@@ -81,9 +81,16 @@ const Home: React.FC = () => {
               className="card"
             >
               <div className="p-6">
-                <h2 className="text-2xl font-bold mb-4 text-yellow-400">{feature.title}</h2>
-                <p className="text-gray-300 mb-4">{feature.description}</p>
-                <Link to={feature.link} className="text-yellow-400 hover:text-yellow-300">
+                <h2 className="text-2xl font-bold mb-4">
+                  {feature.title}
+                </h2>
+                <p className="mb-4">
+                  {feature.description}
+                </p>
+                <Link 
+                  to={feature.link} 
+                  className="text-primary hover:text-primary-hover transition-colors"
+                >
                   Learn more →
                 </Link>
               </div>
@@ -97,8 +104,10 @@ const Home: React.FC = () => {
           animate="animate"
           className="text-center"
         >
-          <h2 className="text-3xl font-bold mb-6 text-yellow-400">Ready to Transform Your Business?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6">
+            Ready to Transform Your Business?
+          </h2>
+          <p className="mb-8 max-w-2xl mx-auto">
             Let's discuss how our solutions can help you achieve your goals.
           </p>
           <Link to="/contact" className="btn">

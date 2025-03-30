@@ -14,11 +14,11 @@ interface BlogPostCardProps {
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
   // Define tag categories with their respective colors
   const tagCategories = {
-    Technology: { bg: 'rgba(156, 163, 175, 0.2)', text: '#D1D5DB', border: 'rgba(156, 163, 175, 0.3)' }, // Gray
-    AI: { bg: 'rgba(139, 92, 246, 0.2)', text: '#A78BFA', border: 'rgba(139, 92, 246, 0.3)' }, // Purple
-    Innovation: { bg: 'rgba(234, 179, 8, 0.2)', text: '#FBBF24', border: 'rgba(234, 179, 8, 0.3)' }, // Yellow
-    Future: { bg: 'rgba(139, 92, 246, 0.2)', text: '#A78BFA', border: 'rgba(139, 92, 246, 0.3)' }, // Purple
-    Development: { bg: 'rgba(234, 179, 8, 0.2)', text: '#FBBF24', border: 'rgba(234, 179, 8, 0.3)' } // Yellow
+    Technology: { bg: 'var(--color-bg)', text: 'var(--color-text-secondary)', border: 'var(--color-border)' },
+    AI: { bg: 'var(--color-bg)', text: 'var(--color-primary)', border: 'var(--color-border)' },
+    Innovation: { bg: 'var(--color-bg)', text: 'var(--color-primary)', border: 'var(--color-border)' },
+    Future: { bg: 'var(--color-bg)', text: 'var(--color-primary)', border: 'var(--color-border)' },
+    Development: { bg: 'var(--color-bg)', text: 'var(--color-primary)', border: 'var(--color-border)' }
   };
 
   // Generate random tags for demonstration (in a real app, these would come from the backend)
@@ -41,92 +41,73 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
   const [likes, setLikes] = React.useState(Math.floor(Math.random() * 100));
   const [isLiked, setIsLiked] = React.useState(false);
 
+  // Mock image URLs for testing
+  const mockImages = {
+    Technology: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=60',
+    AI: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60',
+    Innovation: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=60',
+    Future: 'https://images.unsplash.com/photo-1515630278258-407f66498911?w=800&auto=format&fit=crop&q=60',
+    Development: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop&q=60'
+  };
+
+  // Get a random image based on the first tag
+  const postImageUrl = post.imageUrl || mockImages[randomTags[0] as keyof typeof mockImages];
+
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikes(prev => isLiked ? prev - 1 : prev + 1);
   };
 
   return (
-    <Card 
-      className="card bg-black/80"
-      sx={{ 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column',
-        transition: 'transform 0.2s, box-shadow 0.2s',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: '0 0 20px rgba(234, 179, 8, 0.3)'
-        }
-      }}
+    <div 
+      className="card h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-hover"
     >
-      {post.imageUrl && (
-        <CardMedia
-          component="img"
-          height="200"
-          image={post.imageUrl}
-          alt={post.title}
-          className="metallic-border"
-          sx={{
-            objectFit: 'cover',
-            transition: 'transform 0.3s',
-            '&:hover': {
-              transform: 'scale(1.05)'
-            }
-          }}
-        />
+      {postImageUrl && (
+        <div className="relative h-48 overflow-hidden rounded-lg m-4">
+          <img
+            src={postImageUrl}
+            alt={post.title}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 metallic-border"
+          />
+        </div>
       )}
-      <CardContent className="flex-grow" sx={{ 
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        padding: '1.5rem',
-        '&:last-child': {
-          paddingBottom: '1.5rem'
-        }
-      }}>
+      <div className="flex-grow p-6">
         <motion.div 
           variants={blogPostContentVariant}
           initial="initial"
           animate="animate"
           className="flex flex-col h-full"
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+          <Box className="flex items-center mb-3">
             <Avatar 
-              sx={{ 
-                width: 40, 
-                height: 40, 
-                mr: 2,
-                bgcolor: 'primary.main',
-                border: '2px solid',
-                borderColor: 'yellow.400'
-              }}
+              className="w-10 h-10 mr-2 bg-primary border-2 border-primary"
             >
               {post.author.name.charAt(0)}
             </Avatar>
             <Box>
-              <Typography variant="subtitle2" className="text-yellow-400 mb-1">
+              <Typography variant="subtitle2" className="text-primary mb-1">
                 {post.author.name}
               </Typography>
-              <Typography variant="caption" className="text-gray-400">
+              <Typography variant="caption" className="text-muted">
                 {date}
               </Typography>
             </Box>
           </Box>
 
-          <Typography variant="h6" component="h2" className="text-yellow-400 mb-3">
+          <Typography variant="h6" component="h2" className="text-primary mb-3">
             {post.title}
           </Typography>
           
-          <Typography variant="body2" className="text-gray-300 mb-4 flex-grow">
+          <Typography variant="body2" className="text-secondary mb-8 flex-grow min-h-[120px]">
             {excerpt}
           </Typography>
 
           <Box className="flex flex-wrap gap-2 mb-4">
             {randomTags.map((tag, index) => {
               const tagStyle = tagCategories[tag as keyof typeof tagCategories] || {
-                bg: 'rgba(234, 179, 8, 0.2)',
-                text: '#FBBF24',
-                border: 'rgba(234, 179, 8, 0.3)'
+                bg: 'var(--color-bg)',
+                text: 'var(--color-primary)',
+                border: 'var(--color-border)'
               };
               
               return (
@@ -134,54 +115,40 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
                   key={index}
                   label={tag}
                   size="small"
+                  className="metallic-border transition-all duration-200 hover:-translate-y-0.5"
                   sx={{
                     backgroundColor: tagStyle.bg,
                     color: tagStyle.text,
-                    border: `1px solid ${tagStyle.border}`,
-                    '&:hover': {
-                      backgroundColor: tagStyle.bg.replace('0.2', '0.3'),
-                      transform: 'translateY(-1px)',
-                      transition: 'all 0.2s ease-in-out'
-                    }
+                    border: `1px solid ${tagStyle.border}`
                   }}
                 />
               );
             })}
           </Box>
 
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between',
-            mt: 'auto'
-          }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box className="flex items-center justify-between mt-auto">
+            <Box className="flex items-center">
               <IconButton 
                 onClick={handleLike}
                 size="small"
-                sx={{ 
-                  color: isLiked ? 'error.main' : 'text.secondary',
-                  '&:hover': {
-                    color: 'error.main'
-                  }
-                }}
+                className={`transition-colors ${isLiked ? 'text-error' : 'text-muted hover:text-error'}`}
               >
                 {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
               </IconButton>
-              <Typography variant="body2" className="text-gray-400 ml-1">
+              <Typography variant="body2" className="text-muted ml-1">
                 {likes}
               </Typography>
             </Box>
             <Link 
               to={`/blog/${post.id}`}
-              className="text-yellow-400 hover:text-yellow-300 text-sm font-medium"
+              className="text-primary hover:text-primary-hover text-sm font-medium transition-colors"
             >
               Read more →
             </Link>
           </Box>
         </motion.div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

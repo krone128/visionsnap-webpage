@@ -2,25 +2,38 @@
 
 :root {
   /* Colors */
-  --color-primary: theme('colors.yellow.400');
-  --color-primary-hover: theme('colors.yellow.300');
-  --color-primary-dark: theme('colors.yellow.600');
-  --color-primary-light: theme('colors.yellow.200');
+  --color-primary: theme('colors.sky.400');
+  --color-primary-hover: theme('colors.sky.300');
+  --color-primary-dark: theme('colors.sky.600');
+  --color-primary-light: theme('colors.sky.200');
+  --color-border: theme('colors.sky.500 / 30%');
+  --color-border-hover: theme('colors.sky.400 / 40%');
+
+  /* Shadows */
+  --shadow-primary: 0 0 20px theme('colors.sky.500 / 30%');
+  --shadow-hover: 0 0 30px theme('colors.sky.500 / 40%');
+
   --color-bg: theme('colors.black');
+  --color-bg-80: theme('colors.black / 80%');
   --color-bg-gradient: theme('colors.gray.900');
   --color-text: theme('colors.gray.100');
   --color-text-secondary: theme('colors.gray.300');
   --color-text-muted: theme('colors.gray.400');
-  --color-border: theme('colors.yellow.500 / 30%');
-  --color-border-hover: theme('colors.yellow.400 / 40%');
+
+  /* Status Colors */
+  --color-error: theme('colors.red.500');
+  --color-error-hover: theme('colors.red.600');
+  --color-success: theme('colors.green.500');
+  --color-success-hover: theme('colors.green.600');
+  --color-warning: theme('colors.yellow.500');
+  --color-warning-hover: theme('colors.yellow.600');
+  --color-info: theme('colors.blue.500');
+  --color-info-hover: theme('colors.blue.600');
   
   /* Gradients */
   --gradient-primary: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
   --gradient-bg: linear-gradient(to bottom, var(--color-bg), var(--color-bg-gradient));
-  
-  /* Shadows */
-  --shadow-primary: 0 0 20px theme('colors.yellow.500 / 30%');
-  --shadow-hover: 0 0 30px theme('colors.yellow.500 / 40%');
+
   
   /* Transitions */
   --transition-base: all 0.3s ease-in-out;
@@ -41,11 +54,11 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth bg-black;
   }
 
   body {
-    @apply bg-black text-gray-100;
+    @apply bg-black text-gray-100 min-h-screen;
     margin: 0;
     font-family: var(--font-primary);
     -webkit-font-smoothing: antialiased;
@@ -150,8 +163,7 @@
   }
 
   .card {
-    @apply rounded-lg shadow-lg transition-all duration-300 p-4 sm:p-6;
-    background: rgba(0, 0, 0, 0.8);
+    @apply rounded-lg shadow-lg transition-all duration-300 p-4 sm:p-6 bg-bg-80;
     border: 1px solid var(--color-border);
   }
 

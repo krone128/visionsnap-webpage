@@ -65,7 +65,7 @@ const Login: React.FC = () => {
       >
         <motion.h1 
           variants={headerTransitionVariant}
-          className="text-3xl font-bold mb-8 text-center text-yellow-400"
+          className="text-3xl font-bold mb-8 text-center text-primary"
         >
           Login
         </motion.h1>
@@ -106,11 +106,11 @@ const Login: React.FC = () => {
           variants={descriptionTransitionVariant}
           className="mt-6 text-center"
         >
-          <p className="text-gray-300">
+          <p className="text-secondary">
             Don't have an account?{' '}
             <button
               onClick={() => navigate('/register')}
-              className="text-yellow-400 hover:text-yellow-300"
+              className="text-primary hover:text-primary-hover transition-colors"
             >
               Register
             </button>
