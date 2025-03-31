@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { 
@@ -12,6 +12,7 @@ import {
 import '../styles/animations.css';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   const features = [
     {
       title: 'Augmented Reality',
@@ -61,9 +62,12 @@ const Home: React.FC = () => {
             Empowering businesses with cutting-edge AR and computer vision solutions.
           </motion.p>
           <motion.div variants={descriptionTransitionVariant}>
-            <Link to="/contact" className="btn">
+            <button
+              onClick={() => navigate('/contact')}
+              className="btn"
+            >
               Get Started
-            </Link>
+            </button>
           </motion.div>
         </motion.div>
 
@@ -110,9 +114,12 @@ const Home: React.FC = () => {
           <p className="mb-8 max-w-2xl mx-auto">
             Let's discuss how our solutions can help you achieve your goals.
           </p>
-          <Link to="/contact" className="btn">
+          <button
+            onClick={() => navigate('/contact')}
+            className="btn"
+          >
             Contact Us
-          </Link>
+          </button>
         </motion.div>
       </div>
     </motion.div>

@@ -85,66 +85,47 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
               {post.author.name.charAt(0)}
             </Avatar>
             <Box>
-              <Typography variant="subtitle2" className="text-primary mb-1">
+              <h3 className="text-primary mb-1 font-semibold">
                 {post.author.name}
-              </Typography>
-              <Typography variant="caption" className="text-muted">
+              </h3>
+              <span className="text-secondary text-sm">
                 {date}
-              </Typography>
+              </span>
             </Box>
           </Box>
 
-          <Typography variant="h6" component="h2" className="text-primary mb-3">
+          <h2 className="text-xl font-bold text-primary mb-3">
             {post.title}
-          </Typography>
+          </h2>
           
-          <Typography variant="body2" className="text-secondary mb-8 flex-grow min-h-[120px]">
+          <p className="text-secondary mb-4">
             {excerpt}
-          </Typography>
-
-          <Box className="flex flex-wrap gap-2 mb-4">
-            {randomTags.map((tag, index) => {
-              const tagStyle = tagCategories[tag as keyof typeof tagCategories] || {
-                bg: 'var(--color-bg)',
-                text: 'var(--color-primary)',
-                border: 'var(--color-border)'
-              };
-              
-              return (
-                <Chip
-                  key={index}
-                  label={tag}
-                  size="small"
-                  className="metallic-border transition-all duration-200 hover:-translate-y-0.5"
-                  sx={{
-                    backgroundColor: tagStyle.bg,
-                    color: tagStyle.text,
-                    border: `1px solid ${tagStyle.border}`
-                  }}
-                />
-              );
-            })}
-          </Box>
+          </p>
 
           <Box className="flex items-center justify-between mt-auto">
-            <Box className="flex items-center">
-              <IconButton 
-                onClick={handleLike}
-                size="small"
-                className={`transition-colors ${isLiked ? 'text-error' : 'text-muted hover:text-error'}`}
-              >
-                {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-              </IconButton>
-              <Typography variant="body2" className="text-muted ml-1">
-                {likes}
-              </Typography>
+            <Box className="flex gap-2">
+              {randomTags.map((tag) => (
+                <Chip
+                  key={tag}
+                  label={tag}
+                  size="small"
+                  sx={{
+                    backgroundColor: tagCategories[tag as keyof typeof tagCategories].bg,
+                    color: tagCategories[tag as keyof typeof tagCategories].text,
+                    border: `1px solid ${tagCategories[tag as keyof typeof tagCategories].border}`,
+                    '&:hover': {
+                      backgroundColor: 'var(--color-bg-hover)',
+                    }
+                  }}
+                />
+              ))}
             </Box>
-            <Link 
-              to={`/blog/${post.id}`}
-              className="text-primary hover:text-primary-hover text-sm font-medium transition-colors"
+            <IconButton 
+              onClick={handleLike}
+              className="text-secondary hover:text-primary"
             >
-              Read more →
-            </Link>
+              {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </IconButton>
           </Box>
         </motion.div>
       </div>

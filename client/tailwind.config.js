@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        primary: ['var(--font-primary)'],
+        heading: ['var(--font-heading)'],
+        mono: ['var(--font-mono)'],
+      },
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary)',

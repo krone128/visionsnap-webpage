@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { 
@@ -12,6 +12,7 @@ import {
 import '../styles/animations.css';
 
 const Solutions: React.FC = () => {
+  const navigate = useNavigate();
   const solutions = [
     {
       title: 'Augmented Reality',
@@ -104,9 +105,12 @@ const Solutions: React.FC = () => {
         animate="animate"
         className="mt-12 text-center"
       >
-        <Link to="/contact" className="btn">
+        <button
+          onClick={() => navigate('/contact')}
+          className="btn"
+        >
           Get Started
-        </Link>
+        </button>
       </motion.div>
     </motion.div>
   );

@@ -17,7 +17,16 @@ interface BlogPost {
   content: string;
   imageUrl?: string;
   videoUrl?: string;
-  author: string;
+  author: {
+    id: string;
+    name: string;
+    email: string;
+    picture?: string;
+    role: string;
+    googleId?: string;
+    createdAt: string;
+    updatedAt: string;
+  };
   createdAt: string;
 }
 
@@ -128,7 +137,7 @@ const BlogPostDetail: React.FC = () => {
           <img
             src={post.imageUrl}
             alt={post.title}
-            className="w-full h-96 object-cover metallic-border"
+            className="w-full h-96 object-cover rounded-lg"
           />
         )}
         <div className="p-8">
@@ -142,7 +151,7 @@ const BlogPostDetail: React.FC = () => {
             variants={descriptionTransitionVariant}
             className="flex items-center text-secondary mb-8"
           >
-            <span>{post.author}</span>
+            <span>{post.author.name}</span>
             <span className="mx-2">•</span>
             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
           </motion.div>
@@ -167,7 +176,7 @@ const BlogPostDetail: React.FC = () => {
               <div className="aspect-w-16 aspect-h-9">
                 <iframe
                   src={post.videoUrl}
-                  className="w-full h-full rounded-lg metallic-border"
+                  className="w-full h-full rounded-lg"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />

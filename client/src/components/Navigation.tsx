@@ -21,7 +21,7 @@ const Navigation: React.FC = () => {
     <>
       <Link
         to="/"
-        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors font-primary tracking-wide ${
           isActive('/') 
             ? 'border-primary text-primary' 
             : 'border-transparent text-secondary hover:text-primary hover:border-primary/30'
@@ -31,7 +31,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/portfolio"
-        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors font-primary tracking-wide ${
           isActive('/portfolio') 
             ? 'border-primary text-primary' 
             : 'border-transparent text-secondary hover:text-primary hover:border-primary/30'
@@ -41,7 +41,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/solutions"
-        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors font-primary tracking-wide ${
           isActive('/solutions') 
             ? 'border-primary text-primary' 
             : 'border-transparent text-secondary hover:text-primary hover:border-primary/30'
@@ -51,7 +51,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/about"
-        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors font-primary tracking-wide ${
           isActive('/about') 
             ? 'border-primary text-primary' 
             : 'border-transparent text-secondary hover:text-primary hover:border-primary/30'
@@ -61,7 +61,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/blog"
-        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors font-primary tracking-wide ${
           isActive('/blog') 
             ? 'border-primary text-primary' 
             : 'border-transparent text-secondary hover:text-primary hover:border-primary/30'
@@ -71,7 +71,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/contact"
-        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+        className={`inline-flex items-center px-3 py-2 text-sm font-medium border-b-2 transition-colors font-primary tracking-wide ${
           isActive('/contact') 
             ? 'border-primary text-primary' 
             : 'border-transparent text-secondary hover:text-primary hover:border-primary/30'
@@ -86,7 +86,7 @@ const Navigation: React.FC = () => {
     <>
       <Link
         to="/"
-        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-primary tracking-wide ${
           isActive('/') ? 'text-primary bg-primary/10' : 'text-secondary hover:text-primary hover:bg-primary/10'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -95,7 +95,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/portfolio"
-        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-primary tracking-wide ${
           isActive('/portfolio') ? 'text-primary bg-primary/10' : 'text-secondary hover:text-primary hover:bg-primary/10'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -104,7 +104,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/solutions"
-        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-primary tracking-wide ${
           isActive('/solutions') ? 'text-primary bg-primary/10' : 'text-secondary hover:text-primary hover:bg-primary/10'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -113,7 +113,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/about"
-        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-primary tracking-wide ${
           isActive('/about') ? 'text-primary bg-primary/10' : 'text-secondary hover:text-primary hover:bg-primary/10'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -122,7 +122,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/blog"
-        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-primary tracking-wide ${
           isActive('/blog') ? 'text-primary bg-primary/10' : 'text-secondary hover:text-primary hover:bg-primary/10'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -131,7 +131,7 @@ const Navigation: React.FC = () => {
       </Link>
       <Link
         to="/contact"
-        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-primary tracking-wide ${
           isActive('/contact') ? 'text-primary bg-primary/10' : 'text-secondary hover:text-primary hover:bg-primary/10'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -147,7 +147,7 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between h-16 sm:h-20">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0">
-              <span className="text-3xl sm:text-4xl font-bold text-primary">VisionSnap</span>
+              <span className="text-3xl sm:text-4xl font-bold text-primary font-heading tracking-wider">VisionSnap</span>
             </Link>
             <div className="hidden sm:ml-8 sm:flex sm:space-x-4">
               <DesktopNavLinks />
@@ -176,7 +176,7 @@ const Navigation: React.FC = () => {
                 {(user.role === 'admin' || user.role === 'editor') && (
                   <Link 
                     to="/admin" 
-                    className="text-sm font-medium text-secondary hover:text-primary transition-colors"
+                    className="text-sm font-medium text-secondary hover:text-primary transition-colors font-primary tracking-wide"
                   >
                     Admin
                   </Link>
@@ -189,11 +189,11 @@ const Navigation: React.FC = () => {
                       className="h-8 w-8 rounded-full border border-primary/30"
                     />
                   )}
-                  <span className="text-sm font-medium text-text">{user.name}</span>
+                  <span className="text-sm font-medium text-text font-primary tracking-wide">{user.name}</span>
                 </div>
                 <button
                   onClick={logout}
-                  className="btn text-sm"
+                  className="btn text-sm font-heading tracking-wider"
                 >
                   Sign Out
                 </button>
@@ -201,7 +201,7 @@ const Navigation: React.FC = () => {
             ) : (
               <button
                 onClick={login}
-                className="btn text-sm"
+                className="btn text-sm font-heading tracking-wider"
               >
                 Sign In
               </button>
@@ -252,7 +252,7 @@ const Navigation: React.FC = () => {
             {user ? (
               <div className="flex flex-col space-y-2">
                 {(user.role === 'admin' || user.role === 'editor') && (
-                  <Link to="/admin" className="text-secondary hover:text-primary transition-colors">
+                  <Link to="/admin" className="text-secondary hover:text-primary transition-colors font-primary tracking-wide">
                     Admin
                   </Link>
                 )}
@@ -264,11 +264,11 @@ const Navigation: React.FC = () => {
                       className="h-8 w-8 rounded-full border border-primary/30"
                     />
                   )}
-                  <span className="text-text">{user.name}</span>
+                  <span className="text-text font-primary tracking-wide">{user.name}</span>
                 </div>
                 <button
                   onClick={logout}
-                  className="btn w-full"
+                  className="btn w-full font-heading tracking-wider"
                 >
                   Sign Out
                 </button>
@@ -276,7 +276,7 @@ const Navigation: React.FC = () => {
             ) : (
               <button
                 onClick={login}
-                className="btn w-full"
+                className="btn w-full font-heading tracking-wider"
               >
                 Sign In
               </button>
