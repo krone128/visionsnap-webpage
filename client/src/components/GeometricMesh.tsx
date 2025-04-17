@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 const PLANE_CONFIG = {
   dimensions: {
     width: 50,      // Width of the plane
-    height: 12,      // Height of the plane
+    height: 16,      // Height of the plane
   },
   segments: {
     density: 0.8     // Number of vertical segments
@@ -18,7 +18,7 @@ const PLANE_CONFIG = {
     position: {
       x: 0,        // Camera X position
       y: 10,       // Camera Y position (height)
-      z: 15,       // Camera Z position (distance)
+      z: 13,       // Camera Z position (distance)
     },
     lookAt: {
       x: 0,        // Look at point X

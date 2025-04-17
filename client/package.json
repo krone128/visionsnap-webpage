@@ -15,7 +15,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/three": "^0.175.0",
     "autoprefixer": "^10.4.14",
-    "axios": "^1.6.2",
     "framer-motion": "^12.6.2",
     "postcss": "^8.4.21",
     "react": "^18.2.0",
@@ -31,7 +30,6 @@
     "start": "react-scripts start",
     "build": "PUBLIC_URL=https://krone128.github.io/visioinsnap-webpage react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
