@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "https://krone128.github.io/visionsnap-webpage/static/css/main.d1175bdd.css",
+    "main.js": "https://krone128.github.io/visionsnap-webpage/static/js/main.815d53dd.js",
+    "index.html": "https://krone128.github.io/visionsnap-webpage/index.html",
+    "main.d1175bdd.css.map": "https://krone128.github.io/visionsnap-webpage/static/css/main.d1175bdd.css.map",
+    "main.815d53dd.js.map": "https://krone128.github.io/visionsnap-webpage/static/js/main.815d53dd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1175bdd.css",
+    "static/js/main.815d53dd.js"
+  ]
+}
