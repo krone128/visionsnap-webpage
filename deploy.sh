@@ -22,7 +22,7 @@ npm run deploy
 # Check if deployment was successful
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Deployment successful!${NC}"
-    echo -e "${GREEN}Your application is now live at: https://krone128.github.io/visioinsnap-webpage/${NC}"
+    echo -e "${GREEN}Your application is now live at: https://krone128.github.io/visionsnap-webpage/${NC}"
 else
     echo -e "\033[0;31mDeployment failed. Please check the error messages above.${NC}"
     exit 1

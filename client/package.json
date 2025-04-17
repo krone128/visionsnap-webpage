@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://krone128.github.io/visioinsnap-webpage",
+  "homepage": "https://krone128.github.io/visionsnap-webpage",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "PUBLIC_URL=https://krone128.github.io/visioinsnap-webpage react-scripts build",
+    "build": "PUBLIC_URL=https://krone128.github.io/visionsnap-webpage react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
