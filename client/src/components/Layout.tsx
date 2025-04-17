@@ -1,7 +1,6 @@
 import React from 'react';
 import Navigation from './Navigation';
 import Footer from './Footer';
-import { useAuth } from '../contexts/AuthContext';
 import GeometricMesh from './GeometricMesh';
 import CursorGlow from './CursorGlow';
 
@@ -10,16 +9,6 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: 'var(--color-bg)' }}>
       <div className="fixed inset-0 z-0">

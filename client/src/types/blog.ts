@@ -1,12 +1,11 @@
 export interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   content: string;
   imageUrl?: string;
   author: {
-    id: number;
     name: string;
+    createdAt: string;
   };
   createdAt: string;
-  published: boolean;
 } 

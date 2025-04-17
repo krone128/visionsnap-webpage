@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   pageTransitionVariant, 
@@ -11,82 +9,47 @@ import {
 } from '../styles/animations';
 import '../styles/animations.css';
 
-interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  imageUrl?: string;
-  videoUrl?: string;
-  author: {
-    id: string;
-    name: string;
-    email: string;
-    picture?: string;
-    role: string;
-    googleId?: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-}
+// Static blog posts data
+const blogPosts = {
+  '1': {
+    id: '1',
+    title: 'The Future of AR in Business',
+    content: `Augmented Reality is transforming how businesses operate. From retail to manufacturing, AR is creating new opportunities for innovation and efficiency.
+
+    Companies are using AR to train employees, visualize products, and enhance customer experiences. The technology has proven particularly valuable in complex assembly tasks and remote collaboration scenarios.
+
+    As AR hardware becomes more accessible and powerful, we expect to see even more innovative applications in the business world.`,
+    imageUrl: 'https://example.com/ar-business.jpg',
+    author: {
+      name: 'John Doe',
+      createdAt: '2024-01-15'
+    }
+  },
+  '2': {
+    id: '2',
+    title: 'Computer Vision in Modern Applications',
+    content: `Computer Vision technology is revolutionizing industries across the board. From autonomous vehicles to quality control in manufacturing, CV is becoming an essential tool for businesses.
+
+    Modern CV applications can process and analyze visual data in real-time, making decisions faster and more accurately than human operators.
+
+    The combination of CV with machine learning has opened up new possibilities in object detection, facial recognition, and automated inspection systems.`,
+    imageUrl: 'https://example.com/cv-apps.jpg',
+    author: {
+      name: 'Jane Smith',
+      createdAt: '2024-02-01'
+    }
+  }
+};
 
 const BlogPostDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const post = id ? blogPosts[id as keyof typeof blogPosts] : null;
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/blog/${id}`);
-        setPost(response.data);
-      } catch (err) {
-        setError('Failed to fetch blog post');
-        console.error('Error fetching blog post:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPost();
-  }, [id]);
-
-  const handleDelete = async () => {
-    if (!window.confirm('Are you sure you want to delete this post?')) return;
-
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('No authentication token');
-
-      await axios.delete(`http://localhost:5000/api/blog/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      navigate('/blog');
-    } catch (err) {
-      setError('Failed to delete blog post');
-      console.error('Error deleting blog post:', err);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="flex-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (error || !post) {
+  if (!post) {
     return (
       <div className="container py-12">
         <div className="bg-red-50 border border-red-200 rounded-md p-4">
-          <p className="text-error">{error || 'Post not found'}</p>
+          <p className="text-error">Post not found</p>
         </div>
       </div>
     );
@@ -109,22 +72,6 @@ const BlogPostDetail: React.FC = () => {
         <Link to="/blog" className="text-primary hover:text-primary-hover transition-colors">
           ← Back to Blog
         </Link>
-        {user && (user.role === 'admin' || user.role === 'editor') && (
-          <div className="flex space-x-4">
-            <Link
-              to={`/blog/edit/${id}`}
-              className="btn btn-secondary"
-            >
-              Edit Post
-            </Link>
-            <button
-              onClick={handleDelete}
-              className="btn btn-danger"
-            >
-              Delete Post
-            </button>
-          </div>
-        )}
       </motion.div>
       
       <motion.article 
@@ -153,7 +100,7 @@ const BlogPostDetail: React.FC = () => {
           >
             <span>{post.author.name}</span>
             <span className="mx-2">•</span>
-            <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+            <span>{new Date(post.author.createdAt).toLocaleDateString()}</span>
           </motion.div>
           
           <motion.div 
@@ -162,27 +109,10 @@ const BlogPostDetail: React.FC = () => {
           >
             {post.content.split('\n').map((paragraph, index) => (
               <p key={index} className="mb-4 text-secondary">
-                {paragraph}
+                {paragraph.trim()}
               </p>
             ))}
           </motion.div>
-
-          {post.videoUrl && (
-            <motion.div 
-              variants={descriptionTransitionVariant}
-              className="mt-8"
-            >
-              <h2 className="text-2xl font-semibold mb-4 text-primary">Video</h2>
-              <div className="aspect-w-16 aspect-h-9">
-                <iframe
-                  src={post.videoUrl}
-                  className="w-full h-full rounded-lg"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </motion.div>
-          )}
         </div>
       </motion.article>
     </motion.div>

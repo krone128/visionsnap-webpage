@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "https://krone128.github.io/visioinsnap-webpage/static/css/main.d1175bdd.css",
+    "main.js": "https://krone128.github.io/visioinsnap-webpage/static/js/main.7c75cd91.js",
+    "index.html": "https://krone128.github.io/visioinsnap-webpage/index.html",
+    "main.d1175bdd.css.map": "https://krone128.github.io/visioinsnap-webpage/static/css/main.d1175bdd.css.map",
+    "main.7c75cd91.js.map": "https://krone128.github.io/visioinsnap-webpage/static/js/main.7c75cd91.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1175bdd.css",
+    "static/js/main.7c75cd91.js"
+  ]
+}
