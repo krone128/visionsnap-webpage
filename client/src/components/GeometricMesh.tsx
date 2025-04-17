@@ -2,6 +2,39 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { useTheme } from '../contexts/ThemeContext';
 
+// Geometric mesh configuration
+const PLANE_CONFIG = {
+  dimensions: {
+    width: 50,      // Width of the plane
+    height: 12,      // Height of the plane
+  },
+  segments: {
+    density: 0.8     // Number of vertical segments
+  },
+  position: {
+    y: -6,         // Vertical position of the plane
+  },
+  camera: {
+    position: {
+      x: 0,        // Camera X position
+      y: 10,       // Camera Y position (height)
+      z: 15,       // Camera Z position (distance)
+    },
+    lookAt: {
+      x: 0,        // Look at point X
+      y: -1.2,       // Look at point Y
+      z: 0,        // Look at point Z
+    },
+    fov: 60,       // Field of view in degrees
+  },
+  vertex: {
+    randomness: 0.5,  // Amount of random vertex displacement
+    upwardMovement: 0.8, // Intensity of upward vertex animation
+    breathingIntensity: 0.6, // Intensity of breathing effect
+    horizontalMovement: 0.1, // Intensity of horizontal movement
+  }
+};
+
 const GeometricMesh: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -35,14 +68,16 @@ const GeometricMesh: React.FC = () => {
       
       // Add randomized vertex movement for breathing effect
       vec3 pos = position;
-      float breathing = sin(time * 0.5 + vRandom * 6.28) * 0.2;
-      pos *= (1.0 + breathing);
+      float breathing = sin(time * 0.5 + vRandom * 6.28) * ${PLANE_CONFIG.vertex.breathingIntensity};
       
-      // Add larger random offset to each vertex
+      // Since we're horizontal, apply breathing mainly to Y (up/down)
+      pos.z += breathing; // Using z since we rotated the mesh
+      
+      // Add subtle random movement in all directions
       pos += vec3(
-        sin(time * 0.3 + vRandom * 6.28) * 0.2,
-        cos(time * 0.4 + vRandom * 6.28) * 0.2,
-        sin(time * 0.2 + vRandom * 6.28) * 0.2
+        sin(time * 0.3 + vRandom * 6.28) * ${PLANE_CONFIG.vertex.horizontalMovement},    // X movement
+        sin(time * 0.2 + vRandom * 6.28) * ${PLANE_CONFIG.vertex.horizontalMovement},    // Y movement
+        sin(time * 0.4 + vRandom * 6.28) * ${PLANE_CONFIG.vertex.upwardMovement}     // Z movement (up/down)
       );
       
       gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
@@ -126,12 +161,21 @@ const GeometricMesh: React.FC = () => {
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
-      75,
+      PLANE_CONFIG.camera.fov,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
-    camera.position.z = 8; // Moved camera back to see larger plane
+    camera.position.set(
+      PLANE_CONFIG.camera.position.x,
+      PLANE_CONFIG.camera.position.y,
+      PLANE_CONFIG.camera.position.z
+    );
+    camera.lookAt(
+      PLANE_CONFIG.camera.lookAt.x,
+      PLANE_CONFIG.camera.lookAt.y,
+      PLANE_CONFIG.camera.lookAt.z
+    );
     cameraRef.current = camera;
 
     // Renderer setup
@@ -160,23 +204,27 @@ const GeometricMesh: React.FC = () => {
     });
 
     // Create complex plane with more triangles and random vertex positions
-    const geometry = new THREE.PlaneGeometry(8, 8, 20, 20);
+    const geometry = new THREE.PlaneGeometry(
+      PLANE_CONFIG.dimensions.width,
+      PLANE_CONFIG.dimensions.height,
+      PLANE_CONFIG.dimensions.width * PLANE_CONFIG.segments.density,
+      PLANE_CONFIG.dimensions.height * PLANE_CONFIG.segments.density
+    );
     
     // Add random positions to vertices
     const positions = geometry.attributes.position.array;
     for (let i = 0; i < positions.length; i += 3) {
-      positions[i] += (Math.random() - 0.5) * 0.5;     // X
-      positions[i + 1] += (Math.random() - 0.5) * 0.5; // Y
-      positions[i + 2] += (Math.random() - 0.5) * 0.5; // Z
+      positions[i] += (Math.random() - 0.5) * PLANE_CONFIG.vertex.randomness;     // X
+      positions[i + 1] += (Math.random() - 0.5) * PLANE_CONFIG.vertex.randomness; // Y
+      positions[i + 2] += (Math.random() - 0.5) * PLANE_CONFIG.vertex.randomness; // Z
     }
     geometry.attributes.position.needsUpdate = true;
     
     const mesh = new THREE.Mesh(geometry, material);
     
-    // Rotate to face camera
-    mesh.rotation.x = 0;
-    mesh.rotation.y = 0;
-    mesh.rotation.z = 0;
+    // Position the mesh horizontally
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.y = PLANE_CONFIG.position.y;
     scene.add(mesh);
 
     // Handle scroll
@@ -194,8 +242,8 @@ const GeometricMesh: React.FC = () => {
         material.uniforms.scroll.value = scrollRef.current;
         material.uniforms.isDarkTheme.value = theme === 'dark';
         
-        // Gentle floating motion
-        mesh.position.y = Math.sin(material.uniforms.time.value * 0.5) * 0.2;
+        // Remove the floating motion since vertices handle the animation
+        // mesh.position.y = Math.sin(material.uniforms.time.value * 0.5) * 0.2;
       }
       renderer.render(scene, camera);
     };
